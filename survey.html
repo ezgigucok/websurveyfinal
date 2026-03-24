@@ -269,7 +269,7 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
       <div class="cta-card">
         <h3>Sonuçlarınızı birlikte değerlendirelim.</h3>
         <p>Ücretsiz 30 dakikalık görüşmede bu sonuçların şirketiniz için ne anlama geldiğini konuşalım.</p>
-        <button class="cta-btn" id="gorus-btn" onclick="gorusmePlanla()">Görüşme Planla →</button>
+        <button class="cta-btn" id="gorus-btn" onclick="(async function(){const btn=document.getElementById('gorus-btn');btn.textContent='Gönderiliyor...';btn.disabled=true;try{await fetch('https://websurveyfinal.vercel.app/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({demo:window._demo,sonuclar:window._sonuclar})});btn.textContent='Mesajınız iletildi \u2713';}catch(e){btn.textContent='Hata oluştu';btn.disabled=false;}})()">Görüşme Planla →</button>
       </div>
 
       <div class="legend-bar">
