@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Müşteri Olgunluk Anketi — Güçok</title>
+<link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --jasper: #d5354d;
+  --cloud: #2e304c;
+  --chambray: #38437A;
+  --lavender: #BCC1E1;
+  --powder: #FCE4A9;
+  --rose: #FCCAD5;
+  --bg: #f5f5f2;
+  --white: #ffffff;
+  --text: #2e304c;
+  --text-muted: #6b7280;
+  --border: #e2e2dc;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Rethink Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* LAYOUT */
+.shell {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* PROGRESS */
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.progress-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.progress-track {
+  flex: 1;
+  height: 3px;
+  background: var(--border);
+  border-radius: 999px;
+  margin: 0 1rem;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--jasper);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* STEP INDICATOR */
+.step-dots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 2.5rem;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.3s;
+}
+.dot.active { background: var(--jasper); transform: scale(1.3); }
+.dot.done { background: var(--cloud); }
+
+/* CARDS */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* HEADINGS */
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--cloud);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.section-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* DEMOGRAPHIC FIELDS */
+.field-group { margin-bottom: 1.25rem; }
+.field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cloud);
+  margin-bottom: 8px;
+  display: block;
+}
+.select-wrap { position: relative; }
+.select-wrap::after {
+  content: '▾';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  font-size: 12px;
+}
+select {
+  width: 100%;
+  padding: 10px 36px 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  font-family: 'Rethink Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+select:focus { outline: none; border-color: var(--jasper); }
+select.error { border-color: var(--jasper); }
+
+/* QUESTION CARD — single question at a time */
+.q-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+  animation: fadeUp 0.35s ease;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.q-number {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--jasper);
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+.q-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--cloud);
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+.answer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.ans-btn {
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  font-family: 'Rethink Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ans-btn:hover { border-color: var(--cloud); background: var(--bg); }
+.ans-btn.selected-evet   { border-color: #22c55e; background: #f0fdf4; color: #15803d; }
+.ans-btn.selected-kısmen { border-color: #f59e0b; background: #fffbeb; color: #92400e; }
+.ans-btn.selected-hayır  { border-color: var(--jasper); background: #fff1f2; color: #9f1239; }
+.ans-btn.selected-bilmiyorum { border-color: var(--lavender); background: #f5f5fb; color: var(--chambray); }
+.ans-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+/* NAV BUTTONS */
+.nav-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 1.5rem;
+  align-items: center;
+}
+.btn-back {
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: transparent;
+  font-family: 'Rethink Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-back:hover { background: var(--bg); }
+.btn-next {
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--jasper);
+  font-family: 'Rethink Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-left: auto;
+}
+.btn-next:hover { background: #b8293f; }
+.btn-next:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* EMAIL GATE */
+.email-gate { text-align: center; }
+.email-gate .section-title { font-size: 26px; margin-bottom: 10px; }
+.email-input-wrap { margin: 1.5rem 0; }
+input[type="email"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: 'Rethink Sans', sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--white);
+  transition: border-color 0.2s;
+}
+input[type="email"]:focus { outline: none; border-color: var(--jasper); }
+.kvkk-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+.kvkk-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--jasper);
+  cursor: pointer;
+}
+.kvkk-row label {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  cursor: pointer;
+}
+.kvkk-row a { color: var(--jasper); text-decoration: none; }
+.skip-link {
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  text-decoration: underline;
+  display: block;
+  margin-top: 0.75rem;
+}
+.skip-link:hover { color: var(--cloud); }
+
+/* RESULTS */
+.results-wrap { animation: fadeUp 0.4s ease; }
+.results-hero {
+  background: var(--cloud);
+  border-radius: var(--radius);
+  padding: 2rem;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.results-hero h2 {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
+.results-hero .tagline {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.score-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+@media(max-width: 560px) { .score-cards { grid-template-columns: 1fr; } }
+
+.score-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+.score-card .sc-question {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.score-card .sc-level {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.level-temel    { color: #dc2626; }
+.level-farkında { color: #d97706; }
+.level-bilinçli { color: #2563eb; }
+.level-lider    { color: #16a34a; }
+
+.level-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+.badge-temel    { background: #fee2e2; color: #dc2626; }
+.badge-farkında { background: #fef3c7; color: #d97706; }
+.badge-bilinçli { background: #dbeafe; color: #2563eb; }
+.badge-lider    { background: #dcfce7; color: #16a34a; }
+
+.yorum-text {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+.gelisim-box {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  border-left: 3px solid var(--jasper);
+}
+.gelisim-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--jasper);
+  margin-bottom: 4px;
+}
+.gelisim-text {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.cta-card {
+  background: var(--jasper);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+.cta-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.cta-card p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+.cta-btn {
+  display: inline-block;
+  padding: 13px 32px;
+  background: var(--white);
+  color: var(--jasper);
+  border-radius: var(--radius-sm);
+  font-family: 'Rethink Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+}
+.cta-btn:hover { background: var(--bg); }
+
+.bilmiyorum-warning {
+  background: #fef9c3;
+  border: 1px solid #fde047;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #713f12;
+  margin-top: 1rem;
+  display: none;
+}
+
+.loading-overlay {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--jasper);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 1rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="progress-header">
+    <span class="progress-label" id="prog-label">Başlangıç</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+    </div>
+    <span class="progress-label" id="prog-count">0 / 20</span>
+  </div>
+
+  <div class="step-dots" id="step-dots">
+    <div class="dot active" id="dot-0"></div>
+    <div class="dot" id="dot-1"></div>
+    <div class="dot" id="dot-2"></div>
+    <div class="dot" id="dot-3"></div>
+  </div>
+
+  <!-- STEP 0: Demografik -->
+  <div id="step-demo">
+    <div class="card">
+      <div class="section-title">Merhaba 👋</div>
+      <div class="section-sub">Bu anket şirketinizdeki müşteri odaklılık olgunluğunu ölçmek için tasarlandı. Başlamadan önce birkaç bilgi alalım.</div>
+
+      <div class="field-group">
+        <label class="field-label">Sektör</label>
+        <div class="select-wrap">
+          <select id="d-sektor">
+            <option value="">Seçiniz</option>
+            <option>Bankacılık & Finans</option>
+            <option>Sigortacılık</option>
+            <option>Perakende & E-ticaret</option>
+            <option>Üretim & Sanayi</option>
+            <option>Teknoloji & Yazılım</option>
+            <option>Telekomünikasyon</option>
+            <option>Sağlık & İlaç</option>
+            <option>Eğitim</option>
+            <option>Turizm & Konaklama</option>
+            <option>Lojistik & Taşımacılık</option>
+            <option>Enerji & Doğalgaz</option>
+            <option>İnşaat & Gayrimenkul</option>
+            <option>Medya & Yayıncılık</option>
+            <option>Gıda & İçecek</option>
+            <option>Otomotiv</option>
+            <option>Kamu & Kuruluşlar</option>
+            <option>Danışmanlık & Hizmet</option>
+            <option>Diğer</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Cinsiyet</label>
+        <div class="select-wrap">
+          <select id="d-cinsiyet">
+            <option value="">Seçiniz</option>
+            <option>Kadın</option>
+            <option>Erkek</option>
+            <option>Belirtmek istemiyorum</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Departman</label>
+        <div class="select-wrap">
+          <select id="d-departman">
+            <option value="">Seçiniz</option>
+            <option>Satış</option>
+            <option>Pazarlama</option>
+            <option>Müşteri Hizmetleri</option>
+            <option>Operasyon</option>
+            <option>Finans & Muhasebe</option>
+            <option>İnsan Kaynakları</option>
+            <option>Bilgi Teknolojileri</option>
+            <option>Ürün & Ar-Ge</option>
+            <option>Hukuk</option>
+            <option>Genel Müdürlük</option>
+            <option>Diğer</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Bu şirkette çalışma yılınız</label>
+        <div class="select-wrap">
+          <select id="d-yil">
+            <option value="">Seçiniz</option>
+            <option>1 yıldan az</option>
+            <option>1-3 yıl</option>
+            <option>3-5 yıl</option>
+            <option>5-10 yıl</option>
+            <option>10 yıl ve üzeri</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Şirket büyüklüğü</label>
+        <div class="select-wrap">
+          <select id="d-sirket">
+            <option value="">Seçiniz</option>
+            <option>1-10</option>
+            <option>11-50</option>
+            <option>51-200</option>
+            <option>201-500</option>
+            <option>501-1000</option>
+            <option>1000+</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-next" onclick="submitDemo()">Ankete Başla →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 1: Anket — tek tek soru -->
+  <div id="step-survey" style="display:none">
+    <div class="q-card" id="q-card">
+      <div class="q-number" id="q-number"></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="answer-grid" id="answer-grid"></div>
+      <div class="nav-row">
+        <button class="btn-back" onclick="prevQ()">← Geri</button>
+        <button class="btn-next" id="btn-next-q" onclick="nextQ()" disabled>İleri →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Email gate -->
+  <div id="step-email" style="display:none">
+    <div class="card email-gate">
+      <div class="section-title">Neredeyse bitti!</div>
+      <div class="section-sub">Sonuçlarınızı görmek için e-posta adresinizi girebilirsiniz. İsterseniz bu adımı atlayabilirsiniz.</div>
+
+      <div class="email-input-wrap">
+        <input type="email" id="email-input" placeholder="ornek@sirket.com"/>
+      </div>
+
+      <div class="kvkk-row">
+        <input type="checkbox" id="kvkk-check"/>
+        <label for="kvkk-check">
+          Kişisel verilerimin işlenmesine ilişkin <a href="https://www.gucok.com/gizlilik-politikasi/" target="_blank">Gizlilik Politikası</a>'nı okudum ve onaylıyorum.
+        </label>
+      </div>
+
+      <button class="btn-next" style="width:100%" onclick="submitEmail()">Sonuçlarımı Gör →</button>
+      <span class="skip-link" onclick="skipEmail()">E-posta girmeden devam et</span>
+    </div>
+  </div>
+
+  <!-- STEP 3: Yükleniyor -->
+  <div id="step-loading" style="display:none">
+    <div class="card loading-overlay">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Sonuçlarınız hazırlanıyor...</div>
+    </div>
+  </div>
+
+  <!-- STEP 4: Sonuçlar -->
+  <div id="step-results" style="display:none">
+    <div class="results-wrap">
+      <div class="results-hero">
+        <h2>Müşteri Olgunluk Raporu</h2>
+        <div class="tagline" id="results-tagline">Sonuçlarınız hazır.</div>
+      </div>
+
+      <div class="score-cards">
+        <div class="score-card" id="card-tanima"></div>
+        <div class="score-card" id="card-iliski"></div>
+        <div class="score-card" id="card-yaklasim"></div>
+      </div>
+
+      <div id="bilmiyorum-warning" class="bilmiyorum-warning"></div>
+
+      <div class="cta-card">
+        <h3>Sonuçlarınızı birlikte değerlendirelim.</h3>
+        <p>Ücretsiz 30 dakikalık görüşmede bu sonuçların şirketiniz için ne anlama geldiğini konuşalım.</p>
+        <a href="https://www.gucok.com/iletisim" target="_blank" class="cta-btn">Görüşme Planla →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ─── VERİ ───────────────────────────────────────────────────────────────────
+const PROXY_URL = "https://SENIN-PROJE-ADIN.vercel.app/api/analyze";
+const SAVE_URL  = "https://SENIN-PROJE-ADIN.vercel.app/api/save";
+
+const SORULAR = [
+  { alan:"Tanıma", agirlik:3, soru:"Müşteri ile ilgili bilgiler (iletişim, satın alma, şikayet vb.) düzenli olarak kayıt altına alınır." },
+  { alan:"Tanıma", agirlik:3, soru:"Bir müşteri hakkında geçmişe dönük bilgiye ihtiyaç duyduğumuzda kolayca ulaşılabilir." },
+  { alan:"Tanıma", agirlik:3, soru:"Müşteri bilgilerimiz düzenli olarak güncellenir." },
+  { alan:"Tanıma", agirlik:2, soru:"Müşteriler farklı gruplara/segmentlere ayrılır ve her gruba farklı yaklaşılır." },
+  { alan:"Tanıma", agirlik:2, soru:"Her müşteri grubunun neye ihtiyacı olduğu bilinir ve ona göre hareket edilir." },
+  { alan:"Tanıma", agirlik:1, soru:"Toplanan müşteri verilerinden anlamlı içgörüler üretilir ve karar süreçlerine yansıtılır." },
+  { alan:"İlişki", agirlik:3, soru:"Müşteriler ihtiyaç duyduklarında bize kolayca ulaşabilir." },
+  { alan:"İlişki", agirlik:3, soru:"Müşterilerin hangi kanalı ne sıklıkla kullandığı takip edilir." },
+  { alan:"İlişki", agirlik:2, soru:"Müşteriye sunduğumuz deneyim tüm temas noktalarında tutarlıdır." },
+  { alan:"İlişki", agirlik:2, soru:"Müşteri deneyiminde bir sorun olduğunda fark edilir ve hızlıca düzeltilir." },
+  { alan:"İlişki", agirlik:3, soru:"Müşteri şikayet ve geri bildirimlerini sistematik olarak toplayan bir departman/sistem var." },
+  { alan:"Yaklaşım", agirlik:2, soru:"Şirkette önemli kararlar alınırken müşteriye etkisi mutlaka değerlendirilir." },
+  { alan:"Yaklaşım", agirlik:2, soru:"Zor bir karar anında müşteri çıkarı belirleyici olur." },
+  { alan:"Yaklaşım", agirlik:1, soru:"Müşteri memnuniyeti sadece ilgili ekiplerin değil, tüm çalışanların sorumluluğu olarak görülür." },
+  { alan:"Yaklaşım", agirlik:1, soru:"İş yapış şeklimizde müşteri bakış açısı doğal olarak dikkate alınır." },
+];
+
+const YORUMLAR = {
+  Tanıma: {
+    Temel:    { yorum: "Bu sonuca göre müşteri bilgisi yalnızca ihtiyaç anında toplanıyor gibi görünüyor.\nBilginin güncelliği, erişilebilirliği ve kullanımı konularında zorluklar yaşıyor olabilirsiniz.", gelisim: "Müşteri Bilgilerini Tek Yerde Toplayın\n\nKarmaşık sistemlere, pahalı altyapılara gerek olmadan basit/ücretsiz araçlarla altyapınızı kurup zamanla geliştirin." },
+    Farkında: { yorum: "Bu sonuca göre müşteri bilgisi toplanıyor ancak tüm müşterileri kapsayan ve düzenli güncellenen bir yapı henüz netleşmemiş olabilir. Bu durum, bilginin sürekliliğini ve etkin kullanımını zorlaştırıyor olabilir.", gelisim: "Eksik Müşteri Bilgilerini Analiz Edin\n\nMevcut müşteri verisini gözden geçirerek eksik kalan müşteri gruplarını ve bilgileri sisteme dahil edin." },
+    Bilinçli: { yorum: "Bu sonuca göre müşteri bilgisini düzenli tutma ve anlamlı veriler üretme konusunda belirli bir yapı oluşmuş görünüyor. Ancak tüm müşteri grupları için aynı derinlikte bilgi üretmek her zaman mümkün olmayabilir.", gelisim: "Daha Derin Bir Müşteri Anlayışı Geliştirin\n\nMüşteri segmentleri bazında veriyi zenginleştirerek müşterilerinizin davranışlarını ve ihtiyaçlarını daha net anlamaya başlayın." },
+    Lider:    { yorum: "Bu sonuca göre müşteri bilginiz düzenli, erişilebilir ve kullanılabilir bir yapı içinde yönetiliyor. Bu durum, müşteri davranışlarını anlamanızı ve bu doğrultuda aksiyon almanızı sağlar. Doğru yoldasınız!", gelisim: "Proaktif Yaklaşım ile Fark Yaratın\n\nMevcut verinizi daha etkin kullanarak müşterilerinizin bir sonraki adımını öngörebilecek bir yapı kurmaya başlayın." },
+  },
+  İlişki: {
+    Temel:    { yorum: "Bu sonuca göre müşterilerinizle temas kuruluyor ancak bu temas daha çok ihtiyaç anına bağlı ilerliyor gibi görünüyor. Bu durum, farklı temas noktalarında tutarlı bir deneyim sunmayı zorlaştırıyor olabilir.", gelisim: "Müşteriyle Teması Güçlendirin\n\nMüşterilerinizin size kolay ulaşabildiği ve farklı kanallardan kesintisiz iletişim sağlayabileceğiniz bir yapı oluşturun." },
+    Farkında: { yorum: "Bu sonuca göre müşterilerinizle iletişim kuruluyor ve geri bildirim alınıyor. Ancak temas noktaları arasında deneyim her zaman aynı seviyede ilerlemiyor olabilir.", gelisim: "Deneyimi Tutarlı Hale Getirin\n\nFarklı temas noktalarında müşteriye benzer ve öngörülebilir bir deneyim sunacak süreçleri netleştirin." },
+    Bilinçli: { yorum: "Bu sonuca göre müşteriyle temas ve deneyim belirli bir yapı içinde yönetiliyor gibi görünüyor. Ancak tüm temas noktalarında aynı kaliteyi sağlamak her zaman mümkün olmayabilir.", gelisim: "Geri Bildirimi Sisteme Dahil Edin\n\nMüşteri geri bildirimlerini düzenli toplayarak bu veriyi iyileştirme süreçlerinin bir parçası haline getirin." },
+    Lider:    { yorum: "Bu sonuca göre müşteriyle temas, deneyim ve geri bildirim süreçleri bütüncül şekilde yönetiliyor. Bu yapı, farklı kanallarda tutarlı bir deneyim sunmanızı sağlar.", gelisim: "Deneyimi Sürekli İyileştirin\n\nToplanan geri bildirimleri ve veriyi kullanarak müşteri deneyimini düzenli olarak gözden geçirin ve geliştirin." },
+  },
+  Yaklaşım: {
+    Temel:    { yorum: "Bu sonuca göre müşteri etkisi karar süreçlerinde sınırlı şekilde yer alıyor. Bu durum, müşteri bakış açısının günlük iş yapışa yeterince yansımamasına neden olur.", gelisim: "Kararlarda Müşteri Etkisini Gözetin\n\nÖnemli kararlar alınırken müşteri üzerindeki etkiyi sistematik olarak değerlendiren bir yaklaşım oluşturun." },
+    Farkında: { yorum: "Bu sonuca göre müşteri odaklı bakış açısı çoğu kararda dikkate alınıyor. Ancak öncelikler değiştiğinde bu yaklaşımın geri planda kaldığı durumlar yaşanabilir.", gelisim: "Müşteri Sorumluluğunu Yaygınlaştırın\n\nMüşteri memnuniyetini yalnızca belirli ekiplerin değil, tüm organizasyonun sahiplendiği bir yapı kurun." },
+    Bilinçli: { yorum: "Bu sonuca göre müşteri odaklı bakış açısı karar süreçlerinde belirleyici olmaya başlamış. Ancak bu yaklaşımın tüm ekiplerde aynı düzeyde sahiplenildiği her zaman söylenemeyebilir.", gelisim: "Günlük İşlere Müşteri Bakışını Dahil Edin\n\nMüşteri odaklı düşünceyi yalnızca stratejik kararlar değil, günlük iş yapışın da doğal bir parçası haline getirin." },
+    Lider:    { yorum: "Bu sonuca göre müşteri odaklı düşünce organizasyonun genelinde alınan kararların ve iş yapış şeklinin merkezinde yer alıyor.", gelisim: "Müşteri Odaklı Kültürü Güçlendirin\n\nMüşteri bakış açısını destekleyen davranışları teşvik ederek organizasyon genelinde kalıcı hale getirin." },
+  },
+};
+
+const MAX = { Tanıma: 42, İlişki: 39, Yaklaşım: 18 };
+const ESIKLER = {
+  Tanıma:   [[0,17,"Temel"],[18,27,"Farkında"],[28,36,"Bilinçli"],[37,42,"Lider"]],
+  İlişki:   [[0,16,"Temel"],[17,25,"Farkında"],[26,33,"Bilinçli"],[34,39,"Lider"]],
+  Yaklaşım: [[0,7,"Temel"],[8,11,"Farkında"],[12,15,"Bilinçli"],[16,18,"Lider"]],
+};
+
+// ─── STATE ──────────────────────────────────────────────────────────────────
+const demo = {};
+const cevaplar = {}; // index → {puan, cevap}
+let curQ = 0;
+
+// ─── PROGRESS ───────────────────────────────────────────────────────────────
+function updateProgress(step, qIdx) {
+  const total = 20;
+  const done = step === 0 ? 0 : step === 1 ? 5 + qIdx : step >= 2 ? 20 : 20;
+  const pct = Math.round(done / total * 100);
+  document.getElementById("prog-fill").style.width = pct + "%";
+  document.getElementById("prog-count").textContent = done + " / " + total;
+  const labels = ["Profil", "Sorular", "Son adım", "Sonuçlar"];
+  document.getElementById("prog-label").textContent = labels[Math.min(step, 3)];
+  [0,1,2,3].forEach(i => {
+    const d = document.getElementById("dot-" + i);
+    d.className = "dot" + (i < step ? " done" : i === step ? " active" : "");
+  });
+}
+
+// ─── STEP 0: DEMOGRAFİK ─────────────────────────────────────────────────────
+function submitDemo() {
+  const fields = ["d-sektor","d-cinsiyet","d-departman","d-yil","d-sirket"];
+  let ok = true;
+  fields.forEach(f => {
+    const el = document.getElementById(f);
+    if (!el.value) { el.classList.add("error"); ok = false; }
+    else { el.classList.remove("error"); }
+  });
+  if (!ok) return;
+  demo.sektor    = document.getElementById("d-sektor").value;
+  demo.cinsiyet  = document.getElementById("d-cinsiyet").value;
+  demo.departman = document.getElementById("d-departman").value;
+  demo.yil       = document.getElementById("d-yil").value;
+  demo.sirket    = document.getElementById("d-sirket").value;
+
+  show("step-survey");
+  hide("step-demo");
+  curQ = 0;
+  renderQ();
+  updateProgress(1, 0);
+}
+
+// ─── STEP 1: ANKET ──────────────────────────────────────────────────────────
+function renderQ() {
+  const q = SORULAR[curQ];
+  document.getElementById("q-number").textContent = "Soru " + (curQ + 1) + " / " + SORULAR.length;
+  document.getElementById("q-text").textContent = q.soru;
+
+  const grid = document.getElementById("answer-grid");
+  const secenekler = [
+    { key: "evet",       label: "Evet",          puan: 3 },
+    { key: "kısmen",     label: "Kısmen",        puan: 2 },
+    { key: "hayır",      label: "Hayır",         puan: 1 },
+    { key: "bilmiyorum", label: "Bilmiyorum", puan: null },
+  ];
+
+  grid.innerHTML = "";
+  const mevcut = cevaplar[curQ];
+  secenekler.forEach(s => {
+    const btn = document.createElement("button");
+    btn.className = "ans-btn" + (mevcut && mevcut.cevap === s.key ? " selected-" + s.key : "");
+    btn.innerHTML = `<span class="ans-dot">${mevcut && mevcut.cevap === s.key ? "✓" : ""}</span>${s.label}`;
+    btn.onclick = () => selectAnswer(s.key, s.puan);
+    grid.appendChild(btn);
+  });
+
+  document.getElementById("btn-next-q").disabled = !mevcut;
+  updateProgress(1, curQ);
+
+  // animate
+  const card = document.getElementById("q-card");
+  card.style.animation = "none";
+  card.offsetHeight;
+  card.style.animation = "fadeUp 0.35s ease";
+}
+
+function selectAnswer(key, puan) {
+  cevaplar[curQ] = { cevap: key, puan: puan };
+  renderQ();
+}
+
+function nextQ() {
+  if (!cevaplar[curQ]) return;
+  if (curQ < SORULAR.length - 1) {
+    curQ++;
+    renderQ();
+  } else {
+    hide("step-survey");
+    show("step-email");
+    updateProgress(2, 15);
+  }
+}
+
+function prevQ() {
+  if (curQ > 0) { curQ--; renderQ(); }
+  else { hide("step-survey"); show("step-demo"); updateProgress(0, 0); }
+}
+
+// ─── STEP 2: EMAIL ──────────────────────────────────────────────────────────
+function submitEmail() {
+  const email = document.getElementById("email-input").value.trim();
+  const kvkk  = document.getElementById("kvkk-check").checked;
+  if (email && !kvkk) {
+    alert("E-posta girmek için gizlilik politikasını onaylamanız gerekiyor.");
+    return;
+  }
+  demo.email = email || null;
+  demo.kvkk  = kvkk;
+  goToResults();
+}
+
+function skipEmail() {
+  demo.email = null;
+  demo.kvkk  = false;
+  goToResults();
+}
+
+// ─── STEP 3: RESULTS ────────────────────────────────────────────────────────
+function hesaplaAlan(alan) {
+  let skor = 0, max = 0, bilmiyorumCount = 0;
+  SORULAR.forEach((q, i) => {
+    if (q.alan !== alan) return;
+    const c = cevaplar[i];
+    if (!c) return;
+    if (c.cevap === "bilmiyorum") { bilmiyorumCount++; return; }
+    skor += c.puan * q.agirlik;
+    max  += 3 * q.agirlik;
+  });
+  return { skor, max, bilmiyorumCount };
+}
+
+function seviyeBul(alan, skor) {
+  for (const [min, max, seviye] of ESIKLER[alan]) {
+    if (skor >= min && skor <= max) return seviye;
+  }
+  return "Temel";
+}
+
+function goToResults() {
+  hide("step-email");
+  show("step-loading");
+  updateProgress(3, 15);
+
+  const alanlar = ["Tanıma", "İlişki", "Yaklaşım"];
+  const sonuclar = {};
+  alanlar.forEach(a => {
+    const { skor, bilmiyorumCount } = hesaplaAlan(a);
+    sonuclar[a] = { skor, seviye: seviyeBul(a, skor), bilmiyorumCount };
+  });
+
+  // Kaydet
+  saveData(sonuclar);
+
+  setTimeout(() => {
+    hide("step-loading");
+    show("step-results");
+    renderResults(sonuclar);
+  }, 1200);
+}
+
+function renderResults(sonuclar) {
+  const alanlar = [
+    { key: "Tanıma",   cardId: "card-tanima",   soru: "Müşterilerinizi ne kadar tanıyorsunuz?" },
+    { key: "İlişki",   cardId: "card-iliski",   soru: "Müşterilerinizle nasıl bir ilişkiniz var?" },
+    { key: "Yaklaşım", cardId: "card-yaklasim", soru: "Müşteri odaklı yaklaşımınız nasıl?" },
+  ];
+
+  let bilmiyorumAlerts = [];
+
+  alanlar.forEach(({ key, cardId, soru }) => {
+    const { seviye, bilmiyorumCount } = sonuclar[key];
+    const yData = YORUMLAR[key][seviye];
+    const card  = document.getElementById(cardId);
+    const sLow  = seviye.toLowerCase();
+
+    if (bilmiyorumCount >= 2) {
+      bilmiyorumAlerts.push(`<strong>${key}</strong> alanında ${bilmiyorumCount} soruya "Bilmiyorum" yanıtı verildi — bu alanda iç şeffaflık geliştirilebilir.`);
+    }
+
+    const [gelisimBaslik, ...gelisimRest] = yData.gelisim.split("\n\n");
+    const gelisimAciklama = gelisimRest.join("\n\n");
+
+    card.innerHTML = `
+      <div class="sc-question">${soru}</div>
+      <span class="level-badge badge-${sLow}">${seviye}</span>
+      <div class="yorum-text">${yData.yorum.replace(/\n/g,"<br>")}</div>
+      <div class="gelisim-box">
+        <div class="gelisim-title">→ ${gelisimBaslik}</div>
+        <div class="gelisim-text">${gelisimAciklama}</div>
+      </div>
+    `;
+  });
+
+  // Bilmiyorum uyarısı
+  const warn = document.getElementById("bilmiyorum-warning");
+  if (bilmiyorumAlerts.length > 0) {
+    warn.style.display = "block";
+    warn.innerHTML = "💡 <strong>Dikkat:</strong><br>" + bilmiyorumAlerts.join("<br>");
+  }
+
+  // Tagline
+  const seviyeler = Object.values(sonuclar).map(s => s.seviye);
+  const taglines = {
+    "Lider,Lider,Lider": "Müşteri odaklılıkta lider seviyesiniz.",
+    default: "Sonuçlarınız hazır — birlikte değerlendirelim."
+  };
+  const tag = seviyeler.join(",");
+  document.getElementById("results-tagline").textContent = taglines[tag] || taglines.default;
+}
+
+async function saveData(sonuclar) {
+  try {
+    await fetch(SAVE_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        demo,
+        cevaplar: SORULAR.map((q, i) => ({
+          soru: q.soru,
+          alan: q.alan,
+          cevap: cevaplar[i]?.cevap || null,
+          puan: cevaplar[i]?.puan || null,
+        })),
+        sonuclar,
+        tarih: new Date().toISOString(),
+      })
+    });
+  } catch(e) { console.log("Save error:", e); }
+}
+
+// ─── UTILS ──────────────────────────────────────────────────────────────────
+function show(id) { document.getElementById(id).style.display = ""; }
+function hide(id) { document.getElementById(id).style.display = "none"; }
+</script>
+</body>
+</html>
