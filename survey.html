@@ -485,6 +485,7 @@ function goToResults() {
   setTimeout(() => {
     hide("step-loading");
     show("step-results");
+    window._sonuclar = sonuclar;
     renderResults(sonuclar);
   }, 1000);
 }
