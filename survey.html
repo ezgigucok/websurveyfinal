@@ -593,7 +593,6 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
       </div>
 
       <button class="btn-next" style="width:100%" onclick="submitEmail()">Sonuçlarımı Gör →</button>
-      <span class="skip-link" onclick="skipEmail()">E-posta girmeden devam et</span>
     </div>
   </div>
 
@@ -795,11 +794,15 @@ function prevQ() {
 function submitEmail() {
   const email = document.getElementById("email-input").value.trim();
   const kvkk  = document.getElementById("kvkk-check").checked;
-  if (email && !kvkk) {
-    alert("E-posta girmek için gizlilik politikasını onaylamanız gerekiyor.");
+  if (!email) {
+    alert("Sonuçlarınızı görmek için e-posta adresinizi girmeniz gerekiyor.");
     return;
   }
-  demo.email = email || null;
+  if (!kvkk) {
+    alert("Devam etmek için gizlilik politikasını onaylamanız gerekiyor.");
+    return;
+  }
+  demo.email = email;
   demo.kvkk  = kvkk;
   goToResults();
 }
