@@ -45,3 +45,19 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: e.message });
   }
 }
+async function gorusmePlanla() {
+  const btn = document.getElementById("gorus-btn");
+  btn.textContent = "Gönderiliyor...";
+  btn.disabled = true;
+  try {
+    await fetch("https://websurveyfinal.vercel.app/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ demo, sonuclar: window._sonuclar })
+    });
+    btn.textContent = "Mesajınız iletildi ✓";
+  } catch(e) {
+    btn.textContent = "Hata oluştu, tekrar deneyin";
+    btn.disabled = false;
+  }
+}
