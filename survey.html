@@ -762,6 +762,17 @@ function renderQ() {
 function selectAnswer(key, puan) {
   cevaplar[curQ] = { cevap: key, puan: puan };
   renderQ();
+  setTimeout(() => {
+    if (curQ < SORULAR.length - 1) {
+      curQ++;
+      renderQ();
+    } else {
+      hide("step-survey");
+      show("step-email");
+      updateProgress(2, 15);
+    }
+  }, 400);
+}
 }
 
 function nextQ() {
