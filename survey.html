@@ -11,8 +11,6 @@
   --cloud: #2e304c;
   --chambray: #38437A;
   --lavender: #BCC1E1;
-  --powder: #FCE4A9;
-  --rose: #FCCAD5;
   --bg: #f5f5f2;
   --white: #ffffff;
   --text: #2e304c;
@@ -25,50 +23,46 @@
 body { font-family: 'Rethink Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 .shell { max-width: 680px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
-/* PROGRESS — only shown during survey */
 .progress-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
 .progress-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
 .progress-track { flex: 1; height: 3px; background: var(--border); border-radius: 999px; margin: 0 1rem; overflow: hidden; }
 .progress-fill { height: 100%; background: var(--jasper); border-radius: 999px; transition: width 0.4s ease; }
 
-/* CARD */
 .card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 2rem; margin-bottom: 1rem; }
-.section-title { font-size: 22px; font-weight: 700; color: var(--cloud); margin-bottom: 6px; line-height: 1.3; }
-.section-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6; }
+.section-title { font-size: 22px; font-weight: 700; color: var(--cloud); margin-bottom: 10px; line-height: 1.3; }
+.section-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7; }
 
-/* DEMOGRAPHIC */
 .field-group { margin-bottom: 1.25rem; }
 .field-label { font-size: 13px; font-weight: 600; color: var(--cloud); margin-bottom: 8px; display: block; }
 .select-wrap { position: relative; }
 .select-wrap::after { content: '▾'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; font-size: 12px; }
 select { width: 100%; padding: 10px 36px 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--white); font-family: 'Rethink Sans', sans-serif; font-size: 14px; color: var(--text); appearance: none; cursor: pointer; transition: border-color 0.2s; }
 select:focus { outline: none; border-color: var(--jasper); }
-select.error { border-color: var(--jasper); }
+select.error { border-color: var(--jasper); background: #fff5f5; }
 
-/* QUESTION CARD */
+.error-msg { background: #fff5f5; border: 1px solid #fecdd3; border-radius: var(--radius-sm); padding: 10px 14px; font-size: 13px; color: #be123c; margin-bottom: 1rem; display: none; }
+
 .q-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 2.5rem 2rem; }
 @keyframes slideIn { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: translateX(0); } }
-.q-card.animating { animation: slideIn 0.28s ease; }
+.q-card.animating { animation: slideIn 0.25s ease; }
 .q-number { font-size: 12px; font-weight: 600; color: var(--jasper); letter-spacing: 0.08em; margin-bottom: 1rem; text-transform: uppercase; }
 .q-text { font-size: 20px; font-weight: 700; color: var(--cloud); line-height: 1.45; margin-bottom: 2rem; }
 .answer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.ans-btn { padding: 14px 16px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--white); font-family: 'Rethink Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--text); cursor: pointer; transition: border-color 0.15s, background 0.15s; text-align: left; display: flex; align-items: center; gap: 10px; }
+.ans-btn { padding: 14px 16px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--white); font-family: 'Rethink Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--text); cursor: pointer; transition: border-color 0.12s, background 0.12s; text-align: left; display: flex; align-items: center; gap: 10px; }
 .ans-btn:hover { border-color: var(--cloud); background: var(--bg); }
-.ans-btn.selected-evet { border-color: #22c55e; background: #f0fdf4; color: #15803d; }
-.ans-btn.selected-kismen { border-color: #f59e0b; background: #fffbeb; color: #92400e; }
-.ans-btn.selected-hayir { border-color: var(--jasper); background: #fff1f2; color: #9f1239; }
-.ans-btn.selected-bilmiyorum { border-color: var(--lavender); background: #f5f5fb; color: var(--chambray); }
+.ans-btn.sel-evet { border-color: #22c55e; background: #f0fdf4; color: #15803d; }
+.ans-btn.sel-kismen { border-color: #f59e0b; background: #fffbeb; color: #92400e; }
+.ans-btn.sel-hayir { border-color: var(--jasper); background: #fff1f2; color: #9f1239; }
+.ans-btn.sel-bilmiyorum { border-color: var(--lavender); background: #f5f5fb; color: var(--chambray); }
 .ans-dot { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid currentColor; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; }
 .nav-row { display: flex; gap: 10px; margin-top: 1.5rem; align-items: center; }
-.btn-back { padding: 10px 20px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: transparent; font-family: 'Rethink Sans', sans-serif; font-size: 14px; color: var(--text-muted); cursor: pointer; transition: background 0.15s; }
+.btn-back { padding: 10px 20px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: transparent; font-family: 'Rethink Sans', sans-serif; font-size: 14px; color: var(--text-muted); cursor: pointer; }
 .btn-back:hover { background: var(--bg); }
-.btn-next { padding: 12px 28px; border-radius: var(--radius-sm); border: none; background: var(--jasper); font-family: 'Rethink Sans', sans-serif; font-size: 14px; font-weight: 600; color: var(--white); cursor: pointer; transition: background 0.15s; margin-left: auto; }
+.btn-next { padding: 12px 28px; border-radius: var(--radius-sm); border: none; background: var(--jasper); font-family: 'Rethink Sans', sans-serif; font-size: 14px; font-weight: 600; color: var(--white); cursor: pointer; margin-left: auto; }
 .btn-next:hover { background: #b8293f; }
-.btn-next:disabled { opacity: 0.4; cursor: not-allowed; }
 
-/* EMAIL */
 .email-gate { text-align: center; }
-.email-gate .section-title { font-size: 26px; margin-bottom: 10px; }
+.email-gate .section-title { font-size: 24px; }
 .email-input-wrap { margin: 1.5rem 0; }
 input[type="email"] { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: 'Rethink Sans', sans-serif; font-size: 15px; color: var(--text); background: var(--white); transition: border-color 0.2s; }
 input[type="email"]:focus { outline: none; border-color: var(--jasper); }
@@ -77,24 +71,22 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
 .kvkk-row label { font-size: 13px; color: var(--text-muted); line-height: 1.5; cursor: pointer; }
 .kvkk-row a { color: var(--jasper); text-decoration: none; }
 
-/* LOADING */
 .loading-overlay { text-align: center; padding: 3rem 1rem; }
 .loading-spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--jasper); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .loading-text { font-size: 14px; color: var(--text-muted); }
 
-/* RESULTS */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 .results-wrap { animation: fadeUp 0.4s ease; }
 
-/* CTA — top of results */
 .cta-card { background: var(--jasper); border-radius: var(--radius); padding: 2rem; text-align: center; margin-bottom: 1.5rem; }
 .cta-card h3 { font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
 .cta-card p { font-size: 14px; color: rgba(255,255,255,0.85); margin-bottom: 1.5rem; line-height: 1.6; }
 .cta-btn { display: inline-block; padding: 13px 32px; background: var(--white); color: var(--jasper); border-radius: var(--radius-sm); font-family: 'Rethink Sans', sans-serif; font-size: 15px; font-weight: 700; text-decoration: none; cursor: pointer; border: none; transition: background 0.15s; }
 .cta-btn:hover { background: var(--bg); }
+.cta-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+.tesekkur-msg { font-size: 16px; color: var(--white); font-weight: 500; line-height: 1.6; padding: 0.5rem 0; }
 
-/* LEGEND BAR */
 .legend-bar { display: flex; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 1.5rem; border: 1px solid var(--border); }
 .legend-item { flex: 1; padding: 10px 8px; text-align: center; }
 .legend-item .li-name { font-size: 12px; font-weight: 700; display: block; }
@@ -104,7 +96,6 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
 .li-bilincli { background: #dbeafe; color: #1d4ed8; }
 .li-lider { background: #dcfce7; color: #15803d; }
 
-/* SCORE CARDS — vertical */
 .score-cards { display: flex; flex-direction: column; gap: 14px; margin-bottom: 1.5rem; }
 .score-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
 .sc-question { font-size: 20px; font-weight: 700; color: var(--cloud); margin-bottom: 12px; line-height: 1.35; }
@@ -114,33 +105,30 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
 .badge-bilincli { background: #dbeafe; color: #1d4ed8; }
 .badge-lider { background: #dcfce7; color: #15803d; }
 .yorum-text { font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 14px; }
-
-/* GELISIM — collapsed by default */
-.gelisim-toggle { background: none; border: 1.5px solid var(--jasper); color: var(--jasper); font-family: 'Rethink Sans', sans-serif; font-size: 13px; font-weight: 600; padding: 8px 18px; border-radius: var(--radius-sm); cursor: pointer; transition: background 0.15s; }
+.gelisim-toggle { background: none; border: 1.5px solid var(--jasper); color: var(--jasper); font-family: 'Rethink Sans', sans-serif; font-size: 13px; font-weight: 600; padding: 8px 18px; border-radius: var(--radius-sm); cursor: pointer; }
 .gelisim-toggle:hover { background: #fff1f2; }
 .gelisim-box { background: var(--bg); border-radius: var(--radius-sm); padding: 14px 16px; border-left: 3px solid var(--jasper); margin-top: 12px; display: none; }
 .gelisim-box.open { display: block; animation: fadeUp 0.2s ease; }
 .gelisim-title { font-size: 13px; font-weight: 700; color: var(--jasper); margin-bottom: 6px; }
 .gelisim-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
-
-.bilmiyorum-warning { background: #fef9c3; border: 1px solid #fde047; border-radius: var(--radius-sm); padding: 12px 16px; font-size: 13px; color: #713f12; margin-bottom: 1rem; display: none; }
 </style>
 </head>
 <body>
 <div class="shell">
 
-  <!-- Progress bar — hidden on demo step -->
   <div class="progress-header" id="prog-header" style="display:none">
-    <span class="progress-label" id="prog-label">Sorular</span>
+    <span class="progress-label">Sorular</span>
     <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
-    <span class="progress-label" id="prog-count">0 / 15</span>
+    <span class="progress-label" id="prog-count">1 / 15</span>
   </div>
 
   <!-- STEP 0: Demografik -->
   <div id="step-demo">
     <div class="card">
       <div class="section-title">Merhaba 👋</div>
-      <div class="section-sub">Bu anket şirketinizin ne kadar müşteri odaklı olduğunu ölçmek için tasarlanmıştır.Sizi biraz tanıyalım.</div>
+      <div class="section-sub">Bu anket, şirketinizin müşteri odaklılık seviyesini anlamak için hazırlanmıştır.<br><br>Vereceğiniz yanıtlar, müşteriyle ilgili süreçlerinizin nasıl işlediğini ve nerelerde gelişim alanı olduğunu gösterecektir.<br><br>Başlamadan önce sizi biraz tanıyalım.</div>
+
+      <div class="error-msg" id="demo-error">Tümünü seçmeden ilerleyemezsiniz 😕</div>
 
       <div class="field-group">
         <label class="field-label">Sektör</label>
@@ -151,7 +139,6 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
             <option>Sigortacılık</option>
             <option>Perakende & E-ticaret</option>
             <option>Üretim & Sanayi</option>
-            <option>Hızlı Tüketim</option>
             <option>Teknoloji & Yazılım</option>
             <option>Telekomünikasyon</option>
             <option>Sağlık & İlaç</option>
@@ -165,7 +152,23 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
             <option>Otomotiv</option>
             <option>Kamu & Kuruluşlar</option>
             <option>Danışmanlık & Hizmet</option>
-            <option>Diğer</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Pozisyon</label>
+        <div class="select-wrap">
+          <select id="d-pozisyon">
+            <option value="">Seçiniz</option>
+            <option>Genel Müdür / CEO</option>
+            <option>Yönetim Kurulu Üyesi</option>
+            <option>C-level (CFO, COO, CMO vb.)</option>
+            <option>Direktör / Müdür</option>
+            <option>Takım Lideri / Supervisor</option>
+            <option>Kıdemli Uzman / Senior</option>
+            <option>Uzman / Specialist</option>
+            <option>Asistan / Junior</option>
           </select>
         </div>
       </div>
@@ -237,7 +240,7 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
     </div>
   </div>
 
-  <!-- STEP 2: Email gate -->
+  <!-- STEP 2: Email -->
   <div id="step-email" style="display:none">
     <div class="card email-gate">
       <div class="section-title">Neredeyse bitti!</div>
@@ -267,10 +270,10 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
   <div id="step-results" style="display:none">
     <div class="results-wrap">
 
-      <div class="cta-card">
+      <div class="cta-card" id="cta-card">
         <h3>Sonuçlarınızı birlikte değerlendirelim.</h3>
         <p>Ücretsiz 30 dakikalık görüşmede bu sonuçların şirketiniz için ne anlama geldiğini konuşalım.</p>
-        <button class="cta-btn" id="gorus-btn" onclick="(async function(){const btn=document.getElementById('gorus-btn');btn.textContent='Gönderiliyor...';btn.disabled=true;try{await fetch('https://websurveyfinal.vercel.app/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({demo:window._demo,sonuclar:window._sonuclar})});btn.textContent='Mesajınız iletildi \u2713';}catch(e){btn.textContent='Hata oluştu';btn.disabled=false;}})()">Görüşme Planla →</button>
+        <button class="cta-btn" id="gorus-btn" onclick="gorusmePlanla()">Görüşme Planla →</button>
       </div>
 
       <div class="legend-bar">
@@ -279,7 +282,6 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
         <div class="legend-item li-bilincli"><span class="li-name">Bilinçli</span><span class="li-desc">Oturmuş</span></div>
         <div class="legend-item li-lider"><span class="li-name">Lider</span><span class="li-desc">Olgun</span></div>
       </div>
-
 
       <div class="score-cards">
         <div class="score-card" id="card-tanima"></div>
@@ -291,27 +293,26 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
   </div>
 
 </div>
-
 <script>
-const PROXY_URL = "https://websurveyfinal.vercel.app/api/analyze";
-const SAVE_URL  = "https://websurveyfinal.vercel.app/api/save";
+const SAVE_URL    = "https://websurveyfinal.vercel.app/api/save";
+const CONTACT_URL = "https://websurveyfinal.vercel.app/api/contact";
 
 const SORULAR = [
-  { alan:"Tanima", agirlik:3, soru:"Müşteri ile ilgili bilgiler (iletişim, satın alma, şikayet vb.) düzenli olarak kayıt altına alınır." },
-  { alan:"Tanima", agirlik:3, soru:"Bir müşteri hakkında geçmişe dönük bilgiye ihtiyaç duyduğumuzda kolayca ulaşılabilir." },
-  { alan:"Tanima", agirlik:3, soru:"Müşteri bilgilerimiz düzenli olarak güncellenir." },
-  { alan:"Tanima", agirlik:2, soru:"Müşteriler farklı gruplara/segmentlere ayrılır ve her gruba farklı yaklaşılır." },
-  { alan:"Tanima", agirlik:2, soru:"Her müşteri grubunun neye ihtiyacı olduğu bilinir ve ona göre hareket edilir." },
-  { alan:"Tanima", agirlik:1, soru:"Toplanan müşteri verilerinden anlamlı içgörüler üretilir ve karar süreçlerine yansıtılır." },
-  { alan:"Iliski", agirlik:3, soru:"Müşteriler ihtiyaç duyduklarında bize kolayca ulaşabilir." },
-  { alan:"Iliski", agirlik:3, soru:"Müşterilerin hangi kanalı ne sıklıkla kullandığı takip edilir." },
-  { alan:"Iliski", agirlik:2, soru:"Müşteriye sunduğumuz deneyim tüm temas noktalarında tutarlıdır." },
-  { alan:"Iliski", agirlik:2, soru:"Müşteri deneyiminde bir sorun olduğunda fark edilir ve hızlıca düzeltilir." },
-  { alan:"Iliski", agirlik:3, soru:"Müşteri şikayet ve geri bildirimlerini sistematik olarak toplayan bir departman/sistem var." },
-  { alan:"Yaklasim", agirlik:2, soru:"Şirkette önemli kararlar alınırken müşteriye etkisi mutlaka değerlendirilir." },
+  { alan:"Tanima", agirlik:3, soru:"Müşteri bilgisi yalnızca satış veya satış öncesinde değil, satış sonrası temaslarda da düzenli olarak kayıt altına alınır." },
+  { alan:"Tanima", agirlik:3, soru:"Bir müşteri hakkında geçmiş bilgiye ihtiyaç duyulduğunda bu bilgiye tek bir yerden erişilebilir." },
+  { alan:"Tanima", agirlik:3, soru:"Müşteriyle yapılan görüşmeler sonrası elde edilen bilgiler kayıt altına alınmadan bırakılmaz." },
+  { alan:"Tanima", agirlik:2, soru:"\"Bizim müşteri segmentlerimiz nedir?\" sorusuna tüm firma içinde benzer cevaplar verilir." },
+  { alan:"Tanima", agirlik:2, soru:"Farklı müşteri grupları için ne yapılacağı yorumlarla değişmez, nettir ve herkes tarafından erişilebilir." },
+  { alan:"Tanima", agirlik:1, soru:"Müşteri verisi yalnızca raporlanmaz, bir şeyi değiştirmek için kullanılır." },
+  { alan:"Iliski", agirlik:3, soru:"Müşteriler size ulaşmak için birden fazla yolu denemek zorunda kalmaz." },
+  { alan:"Iliski", agirlik:3, soru:"Müşteriyle temas kurulan noktalar (satış, destek, saha vb.) birbirinden kopuk değildir." },
+  { alan:"Iliski", agirlik:2, soru:"Müşteri farklı kanallarda (satış, destek, saha vb.) aynı konuyu tekrar anlatmak zorunda kalmaz." },
+  { alan:"Iliski", agirlik:2, soru:"Müşteriyle ilgili bilgi temas noktaları arasında kaybolmaz." },
+  { alan:"Iliski", agirlik:3, soru:"Müşteri şikayet ve geri bildirimleri farklı kanallardan gelse bile tek bir yapıda toplanır." },
+  { alan:"Yaklasim", agirlik:2, soru:"Önemli kararlar alınırken müşteri üzerindeki etki açıkça konuşulur ve karar sürecine dahil edilir." },
   { alan:"Yaklasim", agirlik:2, soru:"Zor bir karar anında müşteri çıkarı belirleyici olur." },
-  { alan:"Yaklasim", agirlik:1, soru:"Müşteri memnuniyeti sadece ilgili ekiplerin değil, tüm çalışanların sorumluluğu olarak görülür." },
-  { alan:"Yaklasim", agirlik:1, soru:"İş yapış şeklimizde müşteri bakış açısı doğal olarak dikkate alınır." },
+  { alan:"Yaklasim", agirlik:1, soru:"Müşteri sorunlarında sorumluluk nettir." },
+  { alan:"Yaklasim", agirlik:1, soru:"\"Bu müşteri için doğru olur mu?\" sorusu günlük işlerde sorulur." },
 ];
 
 const YORUMLAR = {
@@ -354,22 +355,24 @@ const cevaplar = {};
 let curQ = 0;
 
 function updateProgress() {
-  const done = Object.keys(cevaplar).length;
-  const total = SORULAR.length;
-  document.getElementById("prog-fill").style.width = Math.round(done / total * 100) + "%";
-  document.getElementById("prog-count").textContent = (curQ + 1) + " / " + total;
+  document.getElementById("prog-fill").style.width = Math.round((curQ + 1) / SORULAR.length * 100) + "%";
+  document.getElementById("prog-count").textContent = (curQ + 1) + " / " + SORULAR.length;
 }
 
 function submitDemo() {
-  const fields = ["d-sektor","d-departman","d-yil","d-sirket"];
+  const fields = ["d-sektor","d-pozisyon","d-departman","d-yil","d-sirket"];
   let ok = true;
   fields.forEach(f => {
     const el = document.getElementById(f);
     if (!el.value) { el.classList.add("error"); ok = false; }
     else el.classList.remove("error");
   });
-  if (!ok) return;
+  const errEl = document.getElementById("demo-error");
+  if (!ok) { errEl.style.display = "block"; return; }
+  errEl.style.display = "none";
+
   demo.sektor    = document.getElementById("d-sektor").value;
+  demo.pozisyon  = document.getElementById("d-pozisyon").value;
   demo.departman = document.getElementById("d-departman").value;
   demo.yil       = document.getElementById("d-yil").value;
   demo.sirket    = document.getElementById("d-sirket").value;
@@ -387,20 +390,20 @@ function renderQ() {
   document.getElementById("q-text").textContent = q.soru;
   updateProgress();
 
-  const grid = document.getElementById("answer-grid");
   const secenekler = [
-    { key: "evet",       label: "Evet",        puan: 3 },
-    { key: "kismen",     label: "Kısmen",      puan: 2 },
-    { key: "hayir",      label: "Hayır",       puan: 1 },
-    { key: "bilmiyorum", label: "Bilmiyorum",  puan: null },
+    { key: "evet",       label: "Evet",       puan: 3 },
+    { key: "kismen",     label: "Kısmen",     puan: 2 },
+    { key: "hayir",      label: "Hayır",      puan: 1 },
+    { key: "bilmiyorum", label: "Bilmiyorum", puan: null },
   ];
   const mevcut = cevaplar[curQ];
+  const grid = document.getElementById("answer-grid");
   grid.innerHTML = "";
   secenekler.forEach(s => {
     const btn = document.createElement("button");
-    btn.className = "ans-btn" + (mevcut && mevcut.cevap === s.key ? " selected-" + s.key : "");
-    btn.innerHTML = `<span class="ans-dot">${mevcut && mevcut.cevap === s.key ? "✓" : ""}</span>${s.label}`;
-    btn.onclick = () => selectAnswer(s.key, s.puan);
+    btn.className = "ans-btn" + (mevcut && mevcut.cevap === s.key ? " sel-" + s.key : "");
+    btn.innerHTML = '<span class="ans-dot">' + (mevcut && mevcut.cevap === s.key ? "✓" : "") + '</span>' + s.label;
+    btn.onclick = () => selectAnswer(s.key, s.puan, btn);
     grid.appendChild(btn);
   });
 
@@ -410,14 +413,11 @@ function renderQ() {
   card.classList.add("animating");
 }
 
-function selectAnswer(key, puan) {
+function selectAnswer(key, puan, btn) {
   cevaplar[curQ] = { cevap: key, puan: puan };
-  
-  // Seçili butonu göster
-  document.querySelectorAll(".ans-btn").forEach(b => b.className = "ans-btn");
-  event.currentTarget.className = "ans-btn selected-" + key;
-  const dot = event.currentTarget.querySelector(".ans-dot");
-  if (dot) dot.textContent = "✓";
+  document.querySelectorAll(".ans-btn").forEach(b => { b.className = "ans-btn"; b.querySelector(".ans-dot").textContent = ""; });
+  btn.className = "ans-btn sel-" + key;
+  btn.querySelector(".ans-dot").textContent = "✓";
 
   setTimeout(() => {
     if (curQ < SORULAR.length - 1) {
@@ -428,16 +428,12 @@ function selectAnswer(key, puan) {
       hide("prog-header");
       show("step-email");
     }
-  }, 350);
+  }, 320);
 }
 
 function prevQ() {
   if (curQ > 0) { curQ--; renderQ(); }
-  else {
-    hide("step-survey");
-    hide("prog-header");
-    show("step-demo");
-  }
+  else { hide("step-survey"); hide("prog-header"); show("step-demo"); }
 }
 
 function submitEmail() {
@@ -480,12 +476,14 @@ function goToResults() {
     sonuclar[a] = { skor, seviye: seviyeBul(a, skor), bilmiyorumCount };
   });
 
+  window._demo = demo;
+  window._sonuclar = sonuclar;
+
   saveData(sonuclar);
 
   setTimeout(() => {
     hide("step-loading");
     show("step-results");
-    window._sonuclar = sonuclar;
     renderResults(sonuclar);
   }, 1000);
 }
@@ -493,19 +491,13 @@ function goToResults() {
 function renderResults(sonuclar) {
   const alanlar = ["Tanima", "Iliski", "Yaklasim"];
   const cardIds = { Tanima: "card-tanima", Iliski: "card-iliski", Yaklasim: "card-yaklasim" };
-  let bilmiyorumAlerts = [];
-  let gelisimCounter = 0;
 
   alanlar.forEach(alan => {
-    const { seviye, bilmiyorumCount } = sonuclar[alan];
+    const { seviye } = sonuclar[alan];
     const yData = YORUMLAR[alan][seviye];
     const card  = document.getElementById(cardIds[alan]);
     const bClass = BADGE_CLASS[seviye];
     const gid = "gelisim-" + alan;
-
-    if (bilmiyorumCount >= 2) {
-      bilmiyorumAlerts.push("<strong>" + alan + "</strong> alaninda " + bilmiyorumCount + " soruya Bilmiyorum yaniti verildi.");
-    }
 
     card.innerHTML =
       '<div class="sc-question">' + ALAN_SORULARI[alan] + '</div>' +
@@ -513,23 +505,38 @@ function renderResults(sonuclar) {
       '<div class="yorum-text">' + yData.yorum + '</div>' +
       '<button class="gelisim-toggle" onclick="toggleGelisim(\'' + gid + '\', this)">Gelişim Alanı →</button>' +
       '<div class="gelisim-box" id="' + gid + '">' +
-        '<div class="gelisim-title">→ ' + yData.gelisim + '</div>' +
+        '<div class="gelisim-title">&#8594; ' + yData.gelisim + '</div>' +
         '<div class="gelisim-text">' + yData.gelisimDetay + '</div>' +
       '</div>';
   });
-
-  const warn = document.getElementById("bilmiyorum-warning");
-  if (bilmiyorumAlerts.length > 0) {
-    warn.style.display = "block";
-    warn.innerHTML = "Dikkat: " + bilmiyorumAlerts.join(" ");
-  }
 }
 
 function toggleGelisim(id, btn) {
   const box = document.getElementById(id);
-  const isOpen = box.classList.contains("open");
   box.classList.toggle("open");
-  btn.textContent = isOpen ? "Gelişim Alanı →" : "Gelişim Alanını Gizle ↑";
+  btn.textContent = box.classList.contains("open") ? "Gelişim Alanını Gizle ↑" : "Gelişim Alanı →";
+}
+
+async function gorusmePlanla() {
+  const btn = document.getElementById("gorus-btn");
+  btn.textContent = "Gönderiliyor...";
+  btn.disabled = true;
+
+  try {
+    const r = await fetch(CONTACT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ demo: window._demo, sonuclar: window._sonuclar })
+    });
+
+    const ctaCard = document.getElementById("cta-card");
+    ctaCard.innerHTML =
+      '<div class="tesekkur-msg">Anketi tamamladığınız için teşekkür ederiz 💙<br><br>Görüşme planlaması için e-posta adresiniz üzerinden iletişime geçeceğiz ✉️</div>';
+
+  } catch(e) {
+    btn.textContent = "Hata oluştu, tekrar deneyin";
+    btn.disabled = false;
+  }
 }
 
 async function saveData(sonuclar) {
