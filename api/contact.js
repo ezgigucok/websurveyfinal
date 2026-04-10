@@ -69,7 +69,35 @@ export default async function handler(req, res) {
     }
 
     // Mail to participant
-    if (demo.email && type === "result") {
+   if (type === "result") {
+  await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${process.env.RESEND_API_KEY}` },
+    body: JSON.stringify({
+      from: "Güçok Anket <anket@gucok.com>",
+      to: ["ezgi@gucok.com"],
+      subject: "Anket Tamamlandı — " + (demo.sektor || "-"),
+      html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;background:#fff;border-radius:12px;border:1px solid #e2e2dc;">
+        <div style="background:#2e304c;padding:24px 32px;">
+          <h1 style="margin:0;font-size:20px;color:#fff;font-weight:700;">Anket Tamamlandı</h1>
+        </div>
+        <div style="padding:28px 32px;">
+          <table style="width:100%;border-collapse:collapse;margin-bottom:20px;">
+            <tr><td style="padding:6px 12px 6px 0;color:#6b7280;font-size:14px;">E-posta</td><td style="padding:6px 0;font-size:14px;font-weight:700;color:#d5354d;">${demo.email || "Girilmedi"}</td></tr>
+            <tr><td style="padding:6px 12px 6px 0;color:#6b7280;font-size:14px;">Sektör</td><td style="padding:6px 0;font-size:14px;color:#2e304c;">${demo.sektor || "-"}</td></tr>
+            <tr><td style="padding:6px 12px 6px 0;color:#6b7280;font-size:14px;">Pozisyon</td><td style="padding:6px 0;font-size:14px;color:#2e304c;">${demo.pozisyon || "-"}</td></tr>
+            <tr><td style="padding:6px 12px 6px 0;color:#6b7280;font-size:14px;">Departman</td><td style="padding:6px 0;font-size:14px;color:#2e304c;">${demo.departman || "-"}</td></tr>
+            <tr><td style="padding:6px 12px 6px 0;color:#6b7280;font-size:14px;">Şirket büyüklüğü</td><td style="padding:6px 0;font-size:14px;color:#2e304c;">${demo.sirket || "-"}</td></tr>
+          </table>
+          <table style="width:100%;border-collapse:collapse;">${skorSatirlari}</table>
+        </div>
+        <div style="background:#f5f5f2;padding:16px 32px;text-align:center;">
+          <p style="margin:0;font-size:12px;color:#9ca3af;">Güçok Müşteri Olgunluk Anketi</p>
+        </div>
+      </div>`,
+    }),
+  });
+}
       const participantHtml = `
 <div style="font-family:'Helvetica Neue',Arial,sans-serif;max-width:560px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e2e2dc;">
   <div style="background:#2e304c;padding:24px 32px;">
