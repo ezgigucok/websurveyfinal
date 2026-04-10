@@ -81,7 +81,7 @@ export default async function handler(req, res) {
     <table style="width:100%;border-collapse:collapse;margin-bottom:28px;">${skorSatirlariMail}</table>
     <p style="font-size:14px;color:#2e304c;line-height:1.7;margin:0 0 24px;">Her sonuç hem müşteriniz hem de firmanız için fırsat barındırıyor. 30 dakikada hangisinden başlayacağınızı konuşalım.</p>
     <div style="text-align:center;margin-bottom:16px;">
-      <a href="https://www.gucok.com/iletisim" style="display:inline-block;padding:13px 32px;background:#d5354d;color:#ffffff;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none;">Ücretsiz Görüşme Planla →</a>
+      <a href="https://websurveyfinal.vercel.app/thanks.html" style="display:inline-block;padding:13px 32px;background:#d5354d;color:#ffffff;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none;">Ücretsiz Görüşme Planla →</a>
     </div>
     <div style="text-align:center;">
       <a href="https://www.gucok.com" style="font-size:13px;color:#6b7280;text-decoration:none;">Güçok hakkında daha fazla bilgi almak için →</a>
