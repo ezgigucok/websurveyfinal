@@ -11,6 +11,9 @@
   --cloud: #2e304c;
   --chambray: #38437A;
   --lavender: #BCC1E1;
+  --powder: #FCE4A9;
+  --rose: #FCCAD5;
+  --green: #2D7D6F;
   --bg: #f5f5f2;
   --white: #ffffff;
   --text: #2e304c;
@@ -21,17 +24,26 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Rethink Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-.shell { max-width: 680px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.shell { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
+/* PROGRESS */
 .progress-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
 .progress-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
 .progress-track { flex: 1; height: 3px; background: var(--border); border-radius: 999px; margin: 0 1rem; overflow: hidden; }
 .progress-fill { height: 100%; background: var(--jasper); border-radius: 999px; transition: width 0.4s ease; }
 
-.card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 2rem; margin-bottom: 1rem; }
-.section-title { font-size: 22px; font-weight: 700; color: var(--cloud); margin-bottom: 10px; line-height: 1.3; }
-.section-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7; }
+/* STEP DOTS */
+.step-dots { display: flex; gap: 8px; margin-bottom: 2rem; }
+.step-dot { width: 32px; height: 4px; border-radius: 999px; background: var(--border); transition: background 0.3s; }
+.step-dot.active { background: var(--jasper); }
+.step-dot.done { background: var(--cloud); }
 
+/* CARD */
+.card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 2rem; margin-bottom: 1rem; }
+
+/* DEMOGRAPHIC */
+.demo-title { font-size: 24px; font-weight: 700; color: var(--cloud); margin-bottom: 8px; }
+.demo-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.7; }
 .field-group { margin-bottom: 1.25rem; }
 .field-label { font-size: 13px; font-weight: 600; color: var(--cloud); margin-bottom: 8px; display: block; }
 .select-wrap { position: relative; }
@@ -39,30 +51,37 @@ body { font-family: 'Rethink Sans', sans-serif; background: var(--bg); color: va
 select { width: 100%; padding: 10px 36px 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--white); font-family: 'Rethink Sans', sans-serif; font-size: 14px; color: var(--text); appearance: none; cursor: pointer; transition: border-color 0.2s; }
 select:focus { outline: none; border-color: var(--jasper); }
 select.error { border-color: var(--jasper); background: #fff5f5; }
-
 .error-msg { background: #fff5f5; border: 1px solid #fecdd3; border-radius: var(--radius-sm); padding: 10px 14px; font-size: 13px; color: #be123c; margin-bottom: 1rem; display: none; }
 
-.q-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 2.5rem 2rem; }
-@keyframes slideIn { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: translateX(0); } }
-.q-card.animating { animation: slideIn 0.25s ease; }
-.q-number { font-size: 12px; font-weight: 600; color: var(--jasper); letter-spacing: 0.08em; margin-bottom: 1rem; text-transform: uppercase; }
-.q-text { font-size: 20px; font-weight: 700; color: var(--cloud); line-height: 1.45; margin-bottom: 2rem; }
-.answer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.ans-btn { padding: 14px 16px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--white); font-family: 'Rethink Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--text); cursor: pointer; transition: border-color 0.12s, background 0.12s; text-align: left; display: flex; align-items: center; gap: 10px; }
+/* SECTION PAGE */
+.section-header { margin-bottom: 1.5rem; }
+.section-num { font-size: 12px; font-weight: 600; color: var(--jasper); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+.section-title { font-size: 22px; font-weight: 700; color: var(--cloud); margin-bottom: 8px; }
+.section-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+/* QUESTION ROWS */
+.q-row { background: var(--white); border-radius: var(--radius-sm); border: 1px solid var(--border); padding: 1.25rem; margin-bottom: 10px; }
+.q-text { font-size: 15px; font-weight: 500; color: var(--cloud); margin-bottom: 1rem; line-height: 1.5; }
+.ans-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+@media(max-width: 560px) { .ans-grid { grid-template-columns: 1fr 1fr; } }
+.ans-btn { padding: 10px 8px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--white); font-family: 'Rethink Sans', sans-serif; font-size: 13px; font-weight: 500; color: var(--text); cursor: pointer; transition: all 0.12s; text-align: center; }
 .ans-btn:hover { border-color: var(--cloud); background: var(--bg); }
-.ans-btn.sel-evet { border-color: #22c55e; background: #f0fdf4; color: #15803d; }
-.ans-btn.sel-kismen { border-color: #f59e0b; background: #fffbeb; color: #92400e; }
+.ans-btn.sel-evet { border-color: var(--green); background: #f0faf8; color: var(--green); }
+.ans-btn.sel-kismen { border-color: #d97706; background: #fffbeb; color: #92400e; }
 .ans-btn.sel-hayir { border-color: var(--jasper); background: #fff1f2; color: #9f1239; }
 .ans-btn.sel-bilmiyorum { border-color: var(--lavender); background: #f5f5fb; color: var(--chambray); }
-.ans-dot { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid currentColor; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+
+/* NAV */
 .nav-row { display: flex; gap: 10px; margin-top: 1.5rem; align-items: center; }
 .btn-back { padding: 10px 20px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: transparent; font-family: 'Rethink Sans', sans-serif; font-size: 14px; color: var(--text-muted); cursor: pointer; }
 .btn-back:hover { background: var(--bg); }
 .btn-next { padding: 12px 28px; border-radius: var(--radius-sm); border: none; background: var(--jasper); font-family: 'Rethink Sans', sans-serif; font-size: 14px; font-weight: 600; color: var(--white); cursor: pointer; margin-left: auto; }
 .btn-next:hover { background: #b8293f; }
+.btn-next:disabled { opacity: 0.4; cursor: not-allowed; }
 
+/* EMAIL */
 .email-gate { text-align: center; }
-.email-gate .section-title { font-size: 24px; }
+.email-gate .demo-title { font-size: 24px; }
 .email-input-wrap { margin: 1.5rem 0; }
 input[type="email"] { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: 'Rethink Sans', sans-serif; font-size: 15px; color: var(--text); background: var(--white); transition: border-color 0.2s; }
 input[type="email"]:focus { outline: none; border-color: var(--jasper); }
@@ -71,62 +90,89 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
 .kvkk-row label { font-size: 13px; color: var(--text-muted); line-height: 1.5; cursor: pointer; }
 .kvkk-row a { color: var(--jasper); text-decoration: none; }
 
+/* LOADING */
 .loading-overlay { text-align: center; padding: 3rem 1rem; }
 .loading-spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--jasper); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .loading-text { font-size: 14px; color: var(--text-muted); }
 
+/* RESULTS */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 .results-wrap { animation: fadeUp 0.4s ease; }
+.results-intro { margin-bottom: 1.5rem; }
+.results-intro p { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
 
-.cta-card { background: var(--jasper); border-radius: var(--radius); padding: 2rem; text-align: center; margin-bottom: 1.5rem; }
-.cta-card h3 { font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
-.cta-card p { font-size: 14px; color: rgba(255,255,255,0.85); margin-bottom: 1.5rem; line-height: 1.6; }
-.cta-btn { display: inline-block; padding: 13px 32px; background: var(--white); color: var(--jasper); border-radius: var(--radius-sm); font-family: 'Rethink Sans', sans-serif; font-size: 15px; font-weight: 700; text-decoration: none; cursor: pointer; border: none; transition: background 0.15s; }
-.cta-btn:hover { background: var(--bg); }
-.cta-btn:disabled { opacity: 0.7; cursor: not-allowed; }
-.tesekkur-msg { font-size: 16px; color: var(--white); font-weight: 500; line-height: 1.6; padding: 0.5rem 0; }
+/* 3 COLUMN CARDS */
+.score-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 1.5rem; }
+@media(max-width: 680px) { .score-grid { grid-template-columns: 1fr; } }
 
-.legend-bar { display: flex; border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 1.5rem; border: 1px solid var(--border); }
-.legend-item { flex: 1; padding: 10px 8px; text-align: center; }
-.legend-item .li-name { font-size: 12px; font-weight: 700; display: block; }
-.legend-item .li-desc { font-size: 11px; display: block; margin-top: 2px; opacity: 0.8; }
-.li-temel { background: #fee2e2; color: #dc2626; }
-.li-farkinda { background: #fef3c7; color: #b45309; }
-.li-bilincli { background: #dbeafe; color: #1d4ed8; }
-.li-lider { background: #dcfce7; color: #15803d; }
+.score-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 
-.score-cards { display: flex; flex-direction: column; gap: 14px; margin-bottom: 1.5rem; }
-.score-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
-.sc-question { font-size: 20px; font-weight: 700; color: var(--cloud); margin-bottom: 12px; line-height: 1.35; }
-.level-badge { display: inline-block; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 999px; margin-bottom: 12px; }
-.badge-temel { background: #fee2e2; color: #dc2626; }
-.badge-farkinda { background: #fef3c7; color: #b45309; }
-.badge-bilincli { background: #dbeafe; color: #1d4ed8; }
-.badge-lider { background: #dcfce7; color: #15803d; }
-.yorum-text { font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 14px; }
-.gelisim-toggle { background: none; border: 1.5px solid var(--jasper); color: var(--jasper); font-family: 'Rethink Sans', sans-serif; font-size: 13px; font-weight: 600; padding: 8px 18px; border-radius: var(--radius-sm); cursor: pointer; }
-.gelisim-toggle:hover { background: #fff1f2; }
-.gelisim-box { background: var(--bg); border-radius: var(--radius-sm); padding: 14px 16px; border-left: 3px solid var(--jasper); margin-top: 12px; display: none; }
-.gelisim-box.open { display: block; animation: fadeUp 0.2s ease; }
-.gelisim-title { font-size: 13px; font-weight: 700; color: var(--jasper); margin-bottom: 6px; }
-.gelisim-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+/* LEVEL BAR */
+.level-bar { display: flex; }
+.level-bar-item { flex: 1; padding: 8px 4px; text-align: center; font-size: 11px; font-weight: 600; cursor: default; }
+.level-bar-item.active { opacity: 1; }
+.level-bar-item.inactive { opacity: 0.35; }
+
+/* Tanıma colors */
+.tanima-low  { background: var(--jasper); color: #fff; }
+.tanima-mid  { background: var(--powder); color: #92400e; }
+.tanima-high { background: var(--cloud); color: #fff; }
+
+/* İlişki colors */
+.iliski-low  { background: var(--jasper); color: #fff; }
+.iliski-mid  { background: var(--powder); color: #92400e; }
+.iliski-high { background: var(--cloud); color: #fff; }
+
+/* Yaklaşım colors */
+.yaklasim-low  { background: var(--jasper); color: #fff; }
+.yaklasim-mid  { background: var(--powder); color: #92400e; }
+.yaklasim-high { background: var(--cloud); color: #fff; }
+
+.score-card-body { padding: 1.25rem; }
+.score-icon { font-size: 24px; margin-bottom: 8px; }
+.score-alan { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; }
+.score-seviye { font-size: 18px; font-weight: 700; color: var(--cloud); margin-bottom: 12px; }
+.score-yorum { font-size: 13px; color: var(--text); line-height: 1.65; white-space: pre-line; }
+
+/* CTA BLOCK */
+.cta-block { background: var(--cloud); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; }
+.cta-block h3 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.cta-block p { font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; line-height: 1.6; }
+.cta-btn { display: inline-block; padding: 12px 28px; background: var(--jasper); color: var(--white); border-radius: var(--radius-sm); font-family: 'Rethink Sans', sans-serif; font-size: 14px; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: background 0.15s; }
+.cta-btn:hover { background: #b8293f; }
+.cta-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.cta-secondary { display: block; margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; }
+.cta-secondary:hover { color: rgba(255,255,255,0.9); }
+.tesekkur-msg { font-size: 16px; color: var(--white); line-height: 1.7; }
+
+/* THANKS PAGE */
+.thanks-wrap { text-align: center; padding: 2rem; animation: fadeUp 0.4s ease; }
+.thanks-wrap h2 { font-size: 24px; font-weight: 700; color: var(--cloud); margin-bottom: 12px; }
+.thanks-wrap p { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem; }
+.btn-gucok { display: inline-block; padding: 12px 28px; background: var(--cloud); color: var(--white); border-radius: var(--radius-sm); font-family: 'Rethink Sans', sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; }
 </style>
 </head>
 <body>
 <div class="shell">
 
   <div class="progress-header" id="prog-header" style="display:none">
-    <span class="progress-label">Sorular</span>
-    <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
-    <span class="progress-label" id="prog-count">1 / 15</span>
+    <div class="step-dots" id="step-dots">
+      <div class="step-dot active" id="dot-0"></div>
+      <div class="step-dot" id="dot-1"></div>
+      <div class="step-dot" id="dot-2"></div>
+    </div>
+    <div class="progress-track" style="margin-left:1rem">
+      <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+    </div>
+    <span class="progress-label" id="prog-label">1 / 3</span>
   </div>
 
   <!-- STEP 0: Demografik -->
   <div id="step-demo">
     <div class="card">
-      <div class="section-title">Merhaba 👋</div>
-      <div class="section-sub">Bu anket, şirketinizin müşteri odaklılık seviyesini anlamak için hazırlanmıştır.<br><br>Vereceğiniz yanıtlar, müşteriyle ilgili süreçlerinizin nasıl işlediğini ve nerelerde gelişim alanı olduğunu gösterecektir.<br><br>Başlamadan önce sizi biraz tanıyalım.</div>
+      <div class="demo-title">Merhaba 👋</div>
+      <div class="demo-sub">Bu anket, şirketinizin müşteri odaklılık seviyesini anlamak için hazırlanmıştır.<br><br>Vereceğiniz yanıtlar, müşteriyle ilgili süreçlerinizin nasıl işlediğini ve nerelerde gelişim alanı olduğunu gösterecektir.<br><br>Başlamadan önce sizi biraz tanıyalım.</div>
 
       <div class="error-msg" id="demo-error">Tümünü seçmeden ilerleyemezsiniz 😕</div>
 
@@ -135,23 +181,16 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
         <div class="select-wrap">
           <select id="d-sektor">
             <option value="">Seçiniz</option>
-            <option>Bankacılık & Finans</option>
-            <option>Sigortacılık</option>
-            <option>Perakende & E-ticaret</option>
-            <option>Üretim & Sanayi</option>
-            <option>Teknoloji & Yazılım</option>
-            <option>Telekomünikasyon</option>
-            <option>Sağlık & İlaç</option>
-            <option>Eğitim</option>
-            <option>Turizm & Konaklama</option>
-            <option>Lojistik & Taşımacılık</option>
-            <option>Enerji & Doğalgaz</option>
-            <option>İnşaat & Gayrimenkul</option>
-            <option>Medya & Yayıncılık</option>
-            <option>Gıda & İçecek</option>
-            <option>Otomotiv</option>
-            <option>Kamu & Kuruluşlar</option>
-            <option>Danışmanlık & Hizmet</option>
+            <option>Bankacılık & Finans</option><option>Sigortacılık</option>
+            <option>Perakende & E-ticaret</option><option>Üretim & Sanayi</option>
+            <option>Teknoloji & Yazılım</option><option>Telekomünikasyon</option>
+            <option>Sağlık & İlaç</option><option>Eğitim</option>
+            <option>Turizm & Konaklama</option><option>Hızlı Tüketim</option>
+            <option>Lojistik & Taşımacılık</option><option>Enerji & Doğalgaz</option>
+            <option>İnşaat & Gayrimenkul</option><option>Medya & Yayıncılık</option>
+            <option>Gıda & İçecek</option><option>Otomotiv</option>
+            <option>Kamu & Kuruluşlar</option><option>Danışmanlık & Hizmet</option>
+            <option>Diğer</option>
           </select>
         </div>
       </div>
@@ -161,13 +200,14 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
         <div class="select-wrap">
           <select id="d-pozisyon">
             <option value="">Seçiniz</option>
-            <option>Genel Müdür / CEO</option>
+            <option>Genel Müdür & CEO</option>
             <option>Yönetim Kurulu Üyesi</option>
-            <option>C-level (CFO, COO, CMO vb.)</option>
-            <option>Direktör / Müdür</option>
-            <option>Takım Lideri / Supervisor</option>
-            <option>Kıdemli Uzman / Senior</option>
-            <option>Uzman / Specialist</option>
+            <option>C-Level (CFO, COO, CMO vb.)</option>
+            <option>Genel Müdür Yardımcısı</option>
+            <option>Direktör</option>
+            <option>Müdür</option>
+            <option>Yönetici</option>
+            <option>Uzman / Senior</option>
             <option>Asistan / Junior</option>
           </select>
         </div>
@@ -178,17 +218,12 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
         <div class="select-wrap">
           <select id="d-departman">
             <option value="">Seçiniz</option>
-            <option>Satış</option>
-            <option>Pazarlama</option>
-            <option>Müşteri Hizmetleri</option>
-            <option>Operasyon</option>
-            <option>Finans & Muhasebe</option>
-            <option>İnsan Kaynakları</option>
-            <option>Bilgi Teknolojileri</option>
-            <option>Ürün & Ar-Ge</option>
-            <option>Hukuk</option>
-            <option>Genel Müdürlük</option>
-            <option>Diğer</option>
+            <option>Satış</option><option>Pazarlama</option><option>Strateji</option>
+            <option>Müşteri Hizmetleri</option><option>Müşteri Deneyimi</option>
+            <option>Operasyon</option><option>Finans & Muhasebe</option>
+            <option>İnsan Kaynakları</option><option>Bilgi Teknolojileri</option>
+            <option>Ürün & Ar-Ge</option><option>Hukuk</option>
+            <option>Genel Müdürlük</option><option>Diğer</option>
           </select>
         </div>
       </div>
@@ -198,10 +233,8 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
         <div class="select-wrap">
           <select id="d-yil">
             <option value="">Seçiniz</option>
-            <option>1 yıldan az</option>
-            <option>1-3 yıl</option>
-            <option>3-5 yıl</option>
-            <option>5-10 yıl</option>
+            <option>1 yıldan az</option><option>1-3 yıl</option>
+            <option>3-5 yıl</option><option>5-10 yıl</option>
             <option>10 yıl ve üzeri</option>
           </select>
         </div>
@@ -212,12 +245,8 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
         <div class="select-wrap">
           <select id="d-sirket">
             <option value="">Seçiniz</option>
-            <option>1-10</option>
-            <option>11-50</option>
-            <option>51-200</option>
-            <option>201-500</option>
-            <option>501-1000</option>
-            <option>1000+</option>
+            <option>1-10</option><option>11-50</option><option>51-200</option>
+            <option>201-500</option><option>501-1000</option><option>1000+</option>
           </select>
         </div>
       </div>
@@ -228,37 +257,65 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
     </div>
   </div>
 
-  <!-- STEP 1: Anket -->
-  <div id="step-survey" style="display:none">
-    <div class="q-card" id="q-card">
-      <div class="q-number" id="q-number"></div>
-      <div class="q-text" id="q-text"></div>
-      <div class="answer-grid" id="answer-grid"></div>
-      <div class="nav-row">
-        <button class="btn-back" onclick="prevQ()">← Geri</button>
-      </div>
+  <!-- STEP 1: Tanıma -->
+  <div id="step-tanima" style="display:none">
+    <div class="section-header">
+      <div class="section-num">1. Bölüm</div>
+      <div class="section-title">Tanıma 🧠</div>
+      <div class="section-desc">Bu bölümde, müşteriyle ilgili bilginin ne kadar sistematik toplandığına, nerede durduğuna ve kararlarınıza ne ölçüde yansıdığına bakıyoruz.</div>
+    </div>
+    <div id="q-tanima"></div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack('step-tanima','step-demo')">← Geri</button>
+      <button class="btn-next" id="btn-tanima" onclick="nextSection('step-tanima','step-iliski',1)" disabled>İleri →</button>
     </div>
   </div>
 
-  <!-- STEP 2: Email -->
+  <!-- STEP 2: İlişki -->
+  <div id="step-iliski" style="display:none">
+    <div class="section-header">
+      <div class="section-num">2. Bölüm</div>
+      <div class="section-title">İlişki 🤝</div>
+      <div class="section-desc">Bu bölümde, müşteriyle kurduğunuz temasın ne kadar tutarlı ve yönetilebilir olduğuna bakıyoruz.</div>
+    </div>
+    <div id="q-iliski"></div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack('step-iliski','step-tanima')">← Geri</button>
+      <button class="btn-next" id="btn-iliski" onclick="nextSection('step-iliski','step-yaklasim',2)" disabled>İleri →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Yaklaşım -->
+  <div id="step-yaklasim" style="display:none">
+    <div class="section-header">
+      <div class="section-num">3. Bölüm</div>
+      <div class="section-title">Yaklaşım 🎯</div>
+      <div class="section-desc">Bu bölümde, müşteri odaklılığın sadece değer listesinde değil; günlük kararlarda ve iş yapış şeklinizde ne kadar yer kapladığına bakıyoruz.</div>
+    </div>
+    <div id="q-yaklasim"></div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBack('step-yaklasim','step-iliski')">← Geri</button>
+      <button class="btn-next" id="btn-yaklasim" onclick="gotoEmail()" disabled>Sonuçlarımı Gör →</button>
+    </div>
+  </div>
+
+  <!-- EMAIL -->
   <div id="step-email" style="display:none">
     <div class="card email-gate">
-      <div class="section-title">Neredeyse bitti!</div>
-      <div class="section-sub">Sonuçlarınızı görmek için e-posta adresinizi girin.</div>
+      <div class="demo-title">Neredeyse bitti!</div>
+      <div class="demo-sub">Sonuçlarınızı görmek için e-posta adresinizi girin.</div>
       <div class="email-input-wrap">
         <input type="email" id="email-input" placeholder="ornek@sirket.com"/>
       </div>
       <div class="kvkk-row">
         <input type="checkbox" id="kvkk-check"/>
-        <label for="kvkk-check">
-          Kişisel verilerimin işlenmesine ilişkin <a href="https://www.gucok.com/gizlilik-politikasi/" target="_blank">Gizlilik Politikası</a>&#39;nı okudum ve onaylıyorum.
-        </label>
+        <label for="kvkk-check">Kişisel verilerimin işlenmesine ilişkin <a href="https://www.gucok.com/gizlilik-politikasi/" target="_blank">Gizlilik Politikası</a>&#39;nı okudum ve onaylıyorum.</label>
       </div>
       <button class="btn-next" style="width:100%" onclick="submitEmail()">Sonuçlarımı Gör →</button>
     </div>
   </div>
 
-  <!-- STEP 3: Yükleniyor -->
+  <!-- LOADING -->
   <div id="step-loading" style="display:none">
     <div class="card loading-overlay">
       <div class="loading-spinner"></div>
@@ -266,97 +323,149 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
     </div>
   </div>
 
-  <!-- STEP 4: Sonuçlar -->
+  <!-- RESULTS -->
   <div id="step-results" style="display:none">
     <div class="results-wrap">
-
-      <div class="cta-card" id="cta-card">
-        <h3>Sonuçlarınızı birlikte değerlendirelim.</h3>
-        <p>Ücretsiz 30 dakikalık görüşmede bu sonuçların şirketiniz için ne anlama geldiğini konuşalım.</p>
-        <button class="cta-btn" id="gorus-btn" onclick="gorusmePlanla()">Görüşme Planla →</button>
+      <div class="results-intro">
+        <p>Bu sonuçlar müşterinizi ne kadar tanıdığınızı, onunla nasıl bir ilişki kurduğunuzu ve herhangi bir karar anında müşteriye yaklaşımınızın nasıl şekillendiğini gösteriyor.<br><br>Doğru yerden başlamak, bu tabloyu iyi yönde değiştirmenin en hızlı yolu.</p>
       </div>
 
-      <div class="legend-bar">
-        <div class="legend-item li-temel"><span class="li-name">Temel</span><span class="li-desc">Başlangıç</span></div>
-        <div class="legend-item li-farkinda"><span class="li-name">Farkında</span><span class="li-desc">Gelişiyor</span></div>
-        <div class="legend-item li-bilincli"><span class="li-name">Bilinçli</span><span class="li-desc">Oturmuş</span></div>
-        <div class="legend-item li-lider"><span class="li-name">Lider</span><span class="li-desc">Olgun</span></div>
-      </div>
-
-      <div class="score-cards">
+      <div class="score-grid">
         <div class="score-card" id="card-tanima"></div>
         <div class="score-card" id="card-iliski"></div>
         <div class="score-card" id="card-yaklasim"></div>
       </div>
 
+      <div class="cta-block" id="cta-block">
+        <h3>Nereden Başlayacağınıza Birlikte Karar Verelim</h3>
+        <p>Her sonuç hem müşteriniz hem de firmanız için fırsat barındırıyor. 30 dakikada hangisinden başlayacağınızı konuşalım.</p>
+        <button class="cta-btn" id="gorus-btn" onclick="gorusmePlanla()">Ücretsiz Görüşme Planla →</button>
+        <a href="https://www.gucok.com" target="_blank" class="cta-secondary">Güçok hakkında daha fazla bilgi almak için →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- THANKS -->
+  <div id="step-thanks" style="display:none">
+    <div class="card thanks-wrap">
+      <div style="font-size:48px;margin-bottom:1rem;">✅</div>
+      <h2>Görüşme talebinizi aldık</h2>
+      <p>Görüşme planlaması için e-posta adresiniz üzerinden en kısa sürede iletişime geçeceğiz ✉️</p>
+      <a href="https://www.gucok.com" target="_blank" class="btn-gucok">Güçok Nedir? →</a>
     </div>
   </div>
 
 </div>
+
 <script>
 const SAVE_URL    = "https://websurveyfinal.vercel.app/api/save";
 const CONTACT_URL = "https://websurveyfinal.vercel.app/api/contact";
 
-const SORULAR = [
-  { alan:"Tanima", agirlik:3, soru:"Müşteri bilgisi yalnızca satış veya satış öncesinde değil, satış sonrası temaslarda da düzenli olarak kayıt altına alınır." },
-  { alan:"Tanima", agirlik:3, soru:"Bir müşteri hakkında geçmiş bilgiye ihtiyaç duyulduğunda bu bilgiye tek bir yerden erişilebilir." },
-  { alan:"Tanima", agirlik:3, soru:"Müşteriyle yapılan görüşmeler sonrası elde edilen bilgiler kayıt altına alınmadan bırakılmaz." },
-  { alan:"Tanima", agirlik:2, soru:"\"Bizim müşteri segmentlerimiz nedir?\" sorusuna tüm firma içinde benzer cevaplar verilir." },
-  { alan:"Tanima", agirlik:2, soru:"Farklı müşteri grupları için ne yapılacağı yorumlarla değişmez, nettir ve herkes tarafından erişilebilir." },
-  { alan:"Tanima", agirlik:1, soru:"Müşteri verisi yalnızca raporlanmaz, bir şeyi değiştirmek için kullanılır." },
-  { alan:"Iliski", agirlik:3, soru:"Müşteriler size ulaşmak için birden fazla yolu denemek zorunda kalmaz." },
-  { alan:"Iliski", agirlik:3, soru:"Müşteriyle temas kurulan noktalar (satış, destek, saha vb.) birbirinden kopuk değildir." },
-  { alan:"Iliski", agirlik:2, soru:"Müşteri farklı kanallarda (satış, destek, saha vb.) aynı konuyu tekrar anlatmak zorunda kalmaz." },
-  { alan:"Iliski", agirlik:2, soru:"Müşteriyle ilgili bilgi temas noktaları arasında kaybolmaz." },
-  { alan:"Iliski", agirlik:3, soru:"Müşteri şikayet ve geri bildirimleri farklı kanallardan gelse bile tek bir yapıda toplanır." },
-  { alan:"Yaklasim", agirlik:2, soru:"Önemli kararlar alınırken müşteri üzerindeki etki açıkça konuşulur ve karar sürecine dahil edilir." },
-  { alan:"Yaklasim", agirlik:2, soru:"Zor bir karar anında müşteri çıkarı belirleyici olur." },
-  { alan:"Yaklasim", agirlik:1, soru:"Müşteri sorunlarında sorumluluk nettir." },
-  { alan:"Yaklasim", agirlik:1, soru:"\"Bu müşteri için doğru olur mu?\" sorusu günlük işlerde sorulur." },
-];
+const BLOCKED_DOMAINS = ["mailinator.com","guerrillamail.com","tempmail.com","yopmail.com","throwam.com","sharklasers.com","guerrillamailblock.com","grr.la","spam4.me","trashmail.com","dispostable.com","maildrop.cc"];
+
+const SORULAR = {
+  tanima: [
+    { id:"t1", agirlik:3, soru:"Müşteri bilgisi yalnızca satış veya satış öncesinde değil, satış sonrası temaslarda da düzenli olarak kayıt altına alınır." },
+    { id:"t2", agirlik:3, soru:"Bir müşteri hakkında geçmiş bilgiye ihtiyaç duyulduğunda bu bilgiye tek bir yerden erişilebilir." },
+    { id:"t3", agirlik:3, soru:"Müşteriyle yapılan görüşmeler sonrası elde edilen bilgiler kayıt altına alınmadan bırakılmaz." },
+    { id:"t4", agirlik:2, soru:"\"Bizim müşteri segmentlerimiz nedir?\" sorusuna tüm firma içinde benzer cevaplar verilir." },
+    { id:"t5", agirlik:2, soru:"Farklı müşteri grupları için ne yapılacağı yorumlarla değişmez, nettir ve herkes tarafından erişilebilir." },
+    { id:"t6", agirlik:1, soru:"Müşteri verisi yalnızca raporlanmaz, bir şeyi değiştirmek için kullanılır." },
+  ],
+  iliski: [
+    { id:"i1", agirlik:3, soru:"Müşteriler herhangi bir kanaldan kolayca ulaşabilir." },
+    { id:"i2", agirlik:3, soru:"Müşteriyle ilgili bilgi sadece onu takip eden kişide kalmaz, paylaşılır." },
+    { id:"i3", agirlik:2, soru:"Müşteri hangi kanaldan ulaşırsa ulaşsın aynı deneyimi yaşar." },
+    { id:"i4", agirlik:2, soru:"Müşteriyle ilgili bilgi bir ekipten diğerine aktarılır, kaybolmaz." },
+    { id:"i5", agirlik:3, soru:"Müşteri şikayet ve geri bildirimleri farklı kanallardan gelse bile tek bir yapıda toplanır." },
+  ],
+  yaklasim: [
+    { id:"y1", agirlik:2, soru:"Önemli kararlar alınırken müşteri üzerindeki etki açıkça konuşulur ve karar sürecine dahil edilir." },
+    { id:"y2", agirlik:2, soru:"Zor bir karar anında müşteri çıkarı belirleyici olur." },
+    { id:"y3", agirlik:1, soru:"Müşteri sorunlarında sorumluluk nettir." },
+    { id:"y4", agirlik:1, soru:"\"Bu müşteri için doğru olur mu?\" sorusu günlük işlerde sorulur." },
+  ]
+};
 
 const YORUMLAR = {
-  Tanima: {
-    Temel:    { yorum: "Bu sonuca göre müşteri bilgisi yalnızca ihtiyaç anında toplanıyor gibi görünüyor. Bilginin güncelliği, erişilebilirliği ve kullanımı konularında zorluklar yaşıyor olabilirsiniz.", gelisim: "Müşteri Bilgilerini Tek Yerde Toplayın", gelisimDetay: "Karmaşık sistemlere, pahalı altyapılara gerek olmadan basit/ücretsiz araçlarla altyapınızı kurup zamanla geliştirin." },
-    Farkinda: { yorum: "Bu sonuca göre müşteri bilgisi toplanıyor ancak tüm müşterileri kapsayan ve düzenli güncellenen bir yapı henüz netleşmemiş olabilir. Bu durum, bilginin sürekliliğini ve etkin kullanımını zorlaştırıyor olabilir.", gelisim: "Eksik Müşteri Bilgilerini Analiz Edin", gelisimDetay: "Mevcut müşteri verisini gözden geçirerek eksik kalan müşteri gruplarını ve bilgileri sisteme dahil edin." },
-    Bilincli: { yorum: "Bu sonuca göre müşteri bilgisini düzenli tutma ve anlamlı veriler üretme konusunda belirli bir yapı oluşmuş görünüyor. Ancak tüm müşteri grupları için aynı derinlikte bilgi üretmek her zaman mümkün olmayabilir.", gelisim: "Daha Derin Bir Müşteri Anlayışı Geliştirin", gelisimDetay: "Müşteri segmentleri bazında veriyi zenginleştirerek müşterilerinizin davranışlarını ve ihtiyaçlarını daha net anlamaya başlayın." },
-    Lider:    { yorum: "Bu sonuca göre müşteri bilginiz düzenli, erişilebilir ve kullanılabilir bir yapı içinde yönetiliyor. Bu durum, müşteri davranışlarını anlamanızı ve bu doğrultuda aksiyon almanızı sağlar. Doğru yoldasınız!", gelisim: "Proaktif Yaklaşım ile Fark Yaratın", gelisimDetay: "Mevcut verinizi daha etkin kullanarak müşterilerinizin bir sonraki adımını öngörebilecek bir yapı kurmaya başlayın." },
+  tanima: {
+    "Kısmen": "Müşterinizi kısmen tanıyorsunuz.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nAynı müşteri birkaç ay arayla tekrar geliyor.\nDaha önce ne satın aldığı, neden tercih ettiği ya da neden uzaklaştığı net değil.\nSiz yeniden teklif veriyorsunuz ama aslında müşterinin neye ihtiyacı olduğu biraz tahminle ilerliyor.\nBazı müşterileri doğru yerden yakalasanız bile bazılarını fark etmeden kaçırıyorsunuz.",
+    "İyi": "Müşterinizi iyi tanıyorsunuz.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nKilit müşterinizle yıllardır çalışan ekip arkadaşınız işten ayrıldı. Müşterinin dosyası, bilgileri ve geçmiş yazışmaları var. Fakat gerçek bilgi, mesela müşterinin ne zaman hassas olduğu, neye değer verdiği veya hangi konuşmadan sonra ne beklediği hiçbir yerde yazılı değil.\nBilgi var, ama sisteme değil insana bağlı. Kişi gidince bilgi de gidiyor.",
+    "Çok İyi": "Müşterinizi çok iyi tanıyorsunuz.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nMüşteriniz yıllardır sizinle çalışıyor. Ekipten kim değişirse değişsin, müşteri her seferinde kendini yeniden anlatmak zorunda kalmıyor. Geçmiş ne, beklenti ne, hangi konularda hassas gibi bilgiler sistemde.\n\nMüşteri henüz bir şey söylemeden siz zaten fark ediyor ve aksiyon alıyorsunuz. Bir sorun çıkmadan önce görüyorsunuz.\nMüşteri bunu her zaman dile getirmez fakat çoğunlukla \"bunlarla çalışmak kolay\" diye düşünür.",
   },
-  Iliski: {
-    Temel:    { yorum: "Bu sonuca göre müşterilerinizle temas kuruluyor ancak bu temas daha çok ihtiyaç anına bağlı ilerliyor gibi görünüyor. Bu durum, farklı temas noktalarında tutarlı bir deneyim sunmayı zorlaştırıyor olabilir.", gelisim: "Müşteriyle Teması Güçlendirin", gelisimDetay: "Müşterilerinizin size kolay ulaşabildiği ve farklı kanallardan kesintisiz iletişim sağlayabileceğiniz bir yapı oluşturun." },
-    Farkinda: { yorum: "Bu sonuca göre müşterilerinizle iletişim kuruluyor ve geri bildirim alınıyor. Ancak temas noktaları arasında deneyim her zaman aynı seviyede ilerlemiyor olabilir.", gelisim: "Deneyimi Tutarlı Hale Getirin", gelisimDetay: "Farklı temas noktalarında müşteriye benzer ve öngörülebilir bir deneyim sunacak süreçleri netleştirin." },
-    Bilincli: { yorum: "Bu sonuca göre müşteriyle temas ve deneyim belirli bir yapı içinde yönetiliyor gibi görünüyor. Ancak tüm temas noktalarında aynı kaliteyi sağlamak her zaman mümkün olmayabilir.", gelisim: "Geri Bildirimi Sisteme Dahil Edin", gelisimDetay: "Müşteri geri bildirimlerini düzenli toplayarak bu veriyi iyileştirme süreçlerinin bir parçası haline getirin." },
-    Lider:    { yorum: "Bu sonuca göre müşteriyle temas, deneyim ve geri bildirim süreçleri bütüncül şekilde yönetiliyor. Bu yapı, farklı kanallarda tutarlı bir deneyim sunmanızı sağlar.", gelisim: "Deneyimi Sürekli İyileştirin", gelisimDetay: "Toplanan geri bildirimleri ve veriyi kullanarak müşteri deneyimini düzenli olarak gözden geçirin ve geliştirin." },
+  iliski: {
+    "Kopuk": "Müşterinizle ilişkiniz kopuk ilerliyor.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nMüşteri bir sorunla geliyor. Önce satış ekibine ulaşıyor, oradan destek ekibine yönlendiriliyor, oradan başka birine. Her seferinde aynı şeyi yeniden anlatıyor.\nSonunda sorun çözülüyor olabilir. Ama o süreçte müşteri ne hissetti diye soracak olursak \"Bu şirketle iş yapmak yorucu\" diyecektir.\nTemas noktaları var ama birbirinden habersiz. Müşteri sistemi değil, şansını deniyor.",
+    "Yönetilebilir": "Müşterinizle ilişkiniz yönetilebilir düzeyde.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nYılın en yoğun döneminde iki ekip üyeniz aynı anda izne çıktı. O hafta müşterilerden gelen talepler yığıldı, bazıları yanıtsız kaldı, bazılarına geç dönüldü.\nMüşteri şikayet etmedi belki. Ama bir sonraki toplantıda \"sizi bulmak bazen zor oluyor\" dedi.\nİlişki kurulmuş — ama kişiye ve kapasiteye bağlı. Sistem zorlandığında ilk görünen yer burası oluyor.",
+    "Oturmuş": "Müşterinizle ilişkiniz oturmuş durumda.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nRakibiniz o büyük müşterinize daha iyi bir fiyat teklif etti. Müşteri size gelip söyledi.\nBu küçük bir jest gibi görünüyor ama aslında değil. Müşteri sizi tercih etmek istiyor ve bunu haklı çıkaracak bir sebep arıyor.\nÇünkü sizinle olan ilişkisi fiyatın ötesinde. Ne zaman ulaşacağını, kimin ilgileneceğini, nasıl ilerleyeceğini biliyor. Bu öngörülebilirlik, rakibin teklifinden daha değerli. Rakibin fiyatı cazip olsa da bilinen bir yoldan çıkmak kolay değil.",
   },
-  Yaklasim: {
-    Temel:    { yorum: "Bu sonuca göre müşteri etkisi karar süreçlerinde sınırlı şekilde yer alıyor. Bu durum, müşteri bakış açısının günlük iş yapışa yeterince yansımamasına neden olur.", gelisim: "Kararlarda Müşteri Etkisini Gözetin", gelisimDetay: "Önemli kararlar alınırken müşteri üzerindeki etkiyi sistematik olarak değerlendiren bir yaklaşım oluşturun." },
-    Farkinda: { yorum: "Bu sonuca göre müşteri odaklı bakış açısı çoğu kararda dikkate alınıyor. Ancak öncelikler değiştiğinde bu yaklaşımın geri planda kaldığı durumlar yaşanabilir.", gelisim: "Müşteri Sorumluluğunu Yaygınlaştırın", gelisimDetay: "Müşteri memnuniyetini yalnızca belirli ekiplerin değil, tüm organizasyonun sahiplendiği bir yapı kurun." },
-    Bilincli: { yorum: "Bu sonuca göre müşteri odaklı bakış açısı karar süreçlerinde belirleyici olmaya başlamış. Ancak bu yaklaşımın tüm ekiplerde aynı düzeyde sahiplenildiği her zaman söylenemeyebilir.", gelisim: "Günlük İşlere Müşteri Bakışını Dahil Edin", gelisimDetay: "Müşteri odaklı düşünceyi yalnızca stratejik kararlar değil, günlük iş yapışın da doğal bir parçası haline getirin." },
-    Lider:    { yorum: "Bu sonuca göre müşteri odaklı düşünce organizasyonun genelinde alınan kararların ve iş yapış şeklinin merkezinde yer alıyor.", gelisim: "Müşteri Odaklı Kültürü Güçlendirin", gelisimDetay: "Müşteri bakış açısını destekleyen davranışları teşvik ederek organizasyon genelinde kalıcı hale getirin." },
-  },
+  yaklasim: {
+    "Değişken": "Müşteri yaklaşımınız değişken.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nŞirket zor bir dönemden geçiyor. Hedefler baskı altında, gündem yoğun.\nO çeyrekte alınan birkaç kritik karar var: Fiyatlandırma, önceliklendirme, kaynak dağılımı.\nToplantılarda müşterinin adı pek geçmedi. Geçmedi çünkü o an için \"lüks\" gibi hissettirdi.\nSonraki çeyrekte her şey normale döndü, müşteri odaklılık yeniden gündemde.\nYaklaşım içten geliyor ama baskı altında ilk geri çekilen şeylerden biri.",
+    "Dikkatli": "Müşteri yaklaşımınız dikkatli.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nÖnemli bir karar masada. Fiyat mı artırılsın, teslimat süresi mi uzasın, yoksa bir özellik mi kaldırılsın.\nToplantıda biri soruyor: \"Peki müşteri bu değişikliği nasıl karşılar?\" Kısa bir sessizlik. Sonra tartışma başlıyor.\nSoru soruluyor ama cevap çoğu zaman veriye değil sezgiye dayanıyor. Kimse konunun olası etkilerini müşteriyle konuşmadı, kimse test etmedi. \"Büyük ihtimalle anlar\" ile devam ediliyor.\nFarkındalık var fakat sistematik değil.",
+    "Belirleyici": "Müşteri yaklaşımınız belirleyici.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nŞirket çağrı merkezi süreçlerini dijitalleştirmeye karar verdi. Projenin başında birçok ekip aynı soruyu sordu: \"Müşteri talep/şikayet iletmek istediğinde ne yapacak?\"\nCevap çoktan hazırdı, çünkü bu soru tasarım aşamasında müşteri perspektifinden geçirilmişti. Talebin nereye gideceği, kimin devralacağı, müşteriye ne zaman dönüleceği baştan tanımlanmıştı.\nSistem devreye girdi. Müşteri talebini iletti ve ilk kez \"bu kadar hızlı mı çözülür?\" diye şaşırdı.\nİçeride büyük bir değişim olmuştu. Müşteri ise sadece sonucu gördü.",
+  }
 };
 
 const ESIKLER = {
-  Tanima:   [[0,17,"Temel"],[18,27,"Farkinda"],[28,36,"Bilincli"],[37,42,"Lider"]],
-  Iliski:   [[0,16,"Temel"],[17,25,"Farkinda"],[26,33,"Bilincli"],[34,39,"Lider"]],
-  Yaklasim: [[0,7,"Temel"],[8,11,"Farkinda"],[12,15,"Bilincli"],[16,18,"Lider"]],
+  tanima:   [[0,17,"Kısmen"],[18,32,"İyi"],[33,42,"Çok İyi"]],
+  iliski:   [[0,16,"Kopuk"],[17,29,"Yönetilebilir"],[30,39,"Oturmuş"]],
+  yaklasim: [[0,7,"Değişken"],[8,13,"Dikkatli"],[14,18,"Belirleyici"]],
 };
 
-const ALAN_SORULARI = {
-  Tanima:   "Müşterilerinizi ne kadar tanıyorsunuz?",
-  Iliski:   "Müşterilerinizle nasıl bir ilişkiniz var?",
-  Yaklasim: "Müşteri odaklı yaklaşımınız nasıl?",
+const ALAN_META = {
+  tanima:   { icon:"🧠", label:"Tanıma", soru:"Müşterinizi ne kadar tanıyorsunuz?", levels:["Kısmen","İyi","Çok İyi"], cls:"tanima" },
+  iliski:   { icon:"🤝", label:"İlişki", soru:"Müşterilerinizle nasıl bir ilişkiniz var?", levels:["Kopuk","Yönetilebilir","Oturmuş"], cls:"iliski" },
+  yaklasim: { icon:"🎯", label:"Yaklaşım", soru:"Müşteri yaklaşımınız nasıl?", levels:["Değişken","Dikkatli","Belirleyici"], cls:"yaklasim" },
 };
-
-const BADGE_CLASS = { Temel:"temel", Farkinda:"farkinda", Bilincli:"bilincli", Lider:"lider" };
 
 const demo = {};
 const cevaplar = {};
-let curQ = 0;
 
-function updateProgress() {
-  document.getElementById("prog-fill").style.width = Math.round((curQ + 1) / SORULAR.length * 100) + "%";
-  document.getElementById("prog-count").textContent = (curQ + 1) + " / " + SORULAR.length;
+function show(id) { document.getElementById(id).style.display = ""; }
+function hide(id) { document.getElementById(id).style.display = "none"; }
+
+function updateDots(active) {
+  [0,1,2].forEach(i => {
+    const d = document.getElementById("dot-"+i);
+    d.className = "step-dot" + (i < active ? " done" : i === active ? " active" : "");
+  });
+  document.getElementById("prog-label").textContent = (active+1) + " / 3";
+  document.getElementById("prog-fill").style.width = Math.round((active+1)/3*100) + "%";
+}
+
+// Build question rows for a section
+function buildSection(alan, containerId, btnId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+  SORULAR[alan].forEach(q => {
+    const div = document.createElement("div");
+    div.className = "q-row";
+    const mevcut = cevaplar[q.id];
+    div.innerHTML = `<div class="q-text">${q.soru}</div>
+      <div class="ans-grid">
+        ${["evet","kismen","hayir","bilmiyorum"].map(k => {
+          const labels = {evet:"Evet", kismen:"Kısmen", hayir:"Hayır", bilmiyorum:"Bilmiyorum"};
+          const sel = mevcut && mevcut.cevap === k ? " sel-"+k : "";
+          return `<button class="ans-btn${sel}" onclick="setAnswer('${q.id}','${k}','${alan}','${btnId}',this)">${labels[k]}</button>`;
+        }).join("")}
+      </div>`;
+    container.appendChild(div);
+  });
+  checkSectionComplete(alan, btnId);
+}
+
+function setAnswer(qid, key, alan, btnId, btn) {
+  const puanMap = {evet:3, kismen:2, hayir:1, bilmiyorum:null};
+  cevaplar[qid] = { cevap: key, puan: puanMap[key] };
+  // Update buttons in this row
+  const row = btn.closest(".q-row");
+  row.querySelectorAll(".ans-btn").forEach(b => b.className = "ans-btn");
+  btn.className = "ans-btn sel-" + key;
+  checkSectionComplete(alan, btnId);
+}
+
+function checkSectionComplete(alan, btnId) {
+  const allAnswered = SORULAR[alan].every(q => cevaplar[q.id]);
+  document.getElementById(btnId).disabled = !allAnswered;
 }
 
 function submitDemo() {
@@ -370,173 +479,141 @@ function submitDemo() {
   const errEl = document.getElementById("demo-error");
   if (!ok) { errEl.style.display = "block"; return; }
   errEl.style.display = "none";
-
   demo.sektor    = document.getElementById("d-sektor").value;
   demo.pozisyon  = document.getElementById("d-pozisyon").value;
   demo.departman = document.getElementById("d-departman").value;
   demo.yil       = document.getElementById("d-yil").value;
   demo.sirket    = document.getElementById("d-sirket").value;
-
   hide("step-demo");
-  show("step-survey");
+  show("step-tanima");
   show("prog-header");
-  curQ = 0;
-  renderQ();
+  updateDots(0);
+  buildSection("tanima","q-tanima","btn-tanima");
 }
 
-function renderQ() {
-  const q = SORULAR[curQ];
-  document.getElementById("q-number").textContent = "Soru " + (curQ + 1) + " / " + SORULAR.length;
-  document.getElementById("q-text").textContent = q.soru;
-  updateProgress();
-
-  const secenekler = [
-    { key: "evet",       label: "Evet",       puan: 3 },
-    { key: "kismen",     label: "Kısmen",     puan: 2 },
-    { key: "hayir",      label: "Hayır",      puan: 1 },
-    { key: "bilmiyorum", label: "Bilmiyorum", puan: null },
-  ];
-  const mevcut = cevaplar[curQ];
-  const grid = document.getElementById("answer-grid");
-  grid.innerHTML = "";
-  secenekler.forEach(s => {
-    const btn = document.createElement("button");
-    btn.className = "ans-btn" + (mevcut && mevcut.cevap === s.key ? " sel-" + s.key : "");
-    btn.innerHTML = '<span class="ans-dot">' + (mevcut && mevcut.cevap === s.key ? "✓" : "") + '</span>' + s.label;
-    btn.onclick = () => selectAnswer(s.key, s.puan, btn);
-    grid.appendChild(btn);
-  });
-
-  const card = document.getElementById("q-card");
-  card.classList.remove("animating");
-  void card.offsetWidth;
-  card.classList.add("animating");
+function nextSection(fromId, toId, dotIdx) {
+  hide(fromId);
+  show(toId);
+  updateDots(dotIdx);
+  const alan = toId.replace("step-","");
+  buildSection(alan, "q-"+alan, "btn-"+alan);
+  window.scrollTo(0,0);
 }
 
-function selectAnswer(key, puan, btn) {
-  cevaplar[curQ] = { cevap: key, puan: puan };
-  document.querySelectorAll(".ans-btn").forEach(b => { b.className = "ans-btn"; b.querySelector(".ans-dot").textContent = ""; });
-  btn.className = "ans-btn sel-" + key;
-  btn.querySelector(".ans-dot").textContent = "✓";
-
-  setTimeout(() => {
-    if (curQ < SORULAR.length - 1) {
-      curQ++;
-      renderQ();
-    } else {
-      hide("step-survey");
-      hide("prog-header");
-      show("step-email");
-    }
-  }, 320);
+function goBack(fromId, toId) {
+  hide(fromId);
+  show(toId);
+  if (toId === "step-demo") { hide("prog-header"); return; }
+  const dotMap = {"step-tanima":0,"step-iliski":1,"step-yaklasim":2};
+  if (dotMap[toId] !== undefined) updateDots(dotMap[toId]);
+  window.scrollTo(0,0);
 }
 
-function prevQ() {
-  if (curQ > 0) { curQ--; renderQ(); }
-  else { hide("step-survey"); hide("prog-header"); show("step-demo"); }
+function gotoEmail() {
+  hide("step-yaklasim");
+  hide("prog-header");
+  show("step-email");
 }
 
 function submitEmail() {
   const email = document.getElementById("email-input").value.trim();
   const kvkk  = document.getElementById("kvkk-check").checked;
   if (!email) { alert("Sonuçlarınızı görmek için e-posta adresinizi girmeniz gerekiyor."); return; }
-  if (!kvkk)  { alert("Devam etmek için gizlilik politikasını onaylamanız gerekiyor."); return; }
+  const domain = email.split("@")[1]?.toLowerCase();
+  if (!domain || BLOCKED_DOMAINS.includes(domain)) { alert("Lütfen geçerli bir iş e-postası girin."); return; }
+  if (!kvkk) { alert("Devam etmek için gizlilik politikasını onaylamanız gerekiyor."); return; }
+  if (email.split("@")[0].length < 3) { alert("Lütfen geçerli bir e-posta adresi girin."); return; }
   demo.email = email;
   demo.kvkk  = kvkk;
   goToResults();
 }
 
 function hesaplaAlan(alan) {
-  let skor = 0, bilmiyorumCount = 0;
-  SORULAR.forEach((q, i) => {
-    if (q.alan !== alan) return;
-    const c = cevaplar[i];
-    if (!c) return;
-    if (c.cevap === "bilmiyorum") { bilmiyorumCount++; return; }
+  let skor = 0;
+  SORULAR[alan].forEach(q => {
+    const c = cevaplar[q.id];
+    if (!c || c.cevap === "bilmiyorum") return;
     skor += c.puan * q.agirlik;
   });
-  return { skor, bilmiyorumCount };
+  return skor;
 }
 
 function seviyeBul(alan, skor) {
   for (const [min, max, seviye] of ESIKLER[alan]) {
     if (skor >= min && skor <= max) return seviye;
   }
-  return "Temel";
+  return ESIKLER[alan][0][2];
 }
 
 function goToResults() {
   hide("step-email");
   show("step-loading");
-
-  const alanlar = ["Tanima", "Iliski", "Yaklasim"];
   const sonuclar = {};
-  alanlar.forEach(a => {
-    const { skor, bilmiyorumCount } = hesaplaAlan(a);
-    sonuclar[a] = { skor, seviye: seviyeBul(a, skor), bilmiyorumCount };
+  ["tanima","iliski","yaklasim"].forEach(a => {
+    const skor = hesaplaAlan(a);
+    sonuclar[a] = { skor, seviye: seviyeBul(a, skor) };
   });
-
   window._demo = demo;
   window._sonuclar = sonuclar;
-
   saveData(sonuclar);
-
+  sendResultMail(sonuclar);
   setTimeout(() => {
     hide("step-loading");
     show("step-results");
     renderResults(sonuclar);
-  }, 1000);
+  }, 1200);
 }
 
 function renderResults(sonuclar) {
-  const alanlar = ["Tanima", "Iliski", "Yaklasim"];
-  const cardIds = { Tanima: "card-tanima", Iliski: "card-iliski", Yaklasim: "card-yaklasim" };
-
-  alanlar.forEach(alan => {
+  ["tanima","iliski","yaklasim"].forEach(alan => {
     const { seviye } = sonuclar[alan];
-    const yData = YORUMLAR[alan][seviye];
-    const card  = document.getElementById(cardIds[alan]);
-    const bClass = BADGE_CLASS[seviye];
-    const gid = "gelisim-" + alan;
+    const meta = ALAN_META[alan];
+    const yorum = YORUMLAR[alan][seviye] || "";
+    const card = document.getElementById("card-"+alan);
+    const levelIdx = meta.levels.indexOf(seviye);
 
-    card.innerHTML =
-      '<div class="sc-question">' + ALAN_SORULARI[alan] + '</div>' +
-      '<span class="level-badge badge-' + bClass + '">' + seviye + '</span>' +
-      '<div class="yorum-text">' + yData.yorum + '</div>' +
-      '<button class="gelisim-toggle" onclick="toggleGelisim(\'' + gid + '\', this)">Gelişim Alanı →</button>' +
-      '<div class="gelisim-box" id="' + gid + '">' +
-        '<div class="gelisim-title">&#8594; ' + yData.gelisim + '</div>' +
-        '<div class="gelisim-text">' + yData.gelisimDetay + '</div>' +
-      '</div>';
+    const barHTML = meta.levels.map((l, i) => {
+      const active = i === levelIdx;
+      return `<div class="level-bar-item ${meta.cls}-${i===0?"low":i===1?"mid":"high"} ${active?"active":"inactive"}">${l}</div>`;
+    }).join("");
+
+    card.innerHTML = `
+      <div class="level-bar">${barHTML}</div>
+      <div class="score-card-body">
+        <div class="score-icon">${meta.icon}</div>
+        <div class="score-alan">${meta.label}</div>
+        <div class="score-seviye">${meta.soru}</div>
+        <div class="score-yorum">${yorum}</div>
+      </div>`;
   });
-}
-
-function toggleGelisim(id, btn) {
-  const box = document.getElementById(id);
-  box.classList.toggle("open");
-  btn.textContent = box.classList.contains("open") ? "Gelişim Alanını Gizle ↑" : "Gelişim Alanı →";
 }
 
 async function gorusmePlanla() {
   const btn = document.getElementById("gorus-btn");
   btn.textContent = "Gönderiliyor...";
   btn.disabled = true;
-
   try {
-    const r = await fetch(CONTACT_URL, {
+    await fetch(CONTACT_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ demo: window._demo, sonuclar: window._sonuclar })
     });
-
-    const ctaCard = document.getElementById("cta-card");
-    ctaCard.innerHTML =
-      '<div class="tesekkur-msg">Anketi tamamladığınız için teşekkür ederiz 💙<br><br>Görüşme planlaması için e-posta adresiniz üzerinden iletişime geçeceğiz ✉️</div>';
-
+    hide("step-results");
+    show("step-thanks");
   } catch(e) {
     btn.textContent = "Hata oluştu, tekrar deneyin";
     btn.disabled = false;
   }
+}
+
+async function sendResultMail(sonuclar) {
+  try {
+    await fetch(CONTACT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ demo, sonuclar, type: "result" })
+    });
+  } catch(e) {}
 }
 
 async function saveData(sonuclar) {
@@ -546,21 +623,13 @@ async function saveData(sonuclar) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         demo,
-        cevaplar: SORULAR.map((q, i) => ({
-          soru: q.soru,
-          alan: q.alan,
-          cevap: cevaplar[i] ? cevaplar[i].cevap : null,
-          puan: cevaplar[i] ? cevaplar[i].puan : null,
-        })),
+        cevaplar: Object.entries(cevaplar).map(([id, c]) => ({ id, cevap: c.cevap, puan: c.puan })),
         sonuclar,
         tarih: new Date().toISOString(),
       })
     });
-  } catch(e) { console.log("Save error:", e); }
+  } catch(e) {}
 }
-
-function show(id) { document.getElementById(id).style.display = ""; }
-function hide(id) { document.getElementById(id).style.display = "none"; }
 </script>
 </body>
 </html>
