@@ -440,7 +440,7 @@ function buildSection(alan, containerId, btnId) {
     const div = document.createElement("div");
     div.className = "q-row";
     const mevcut = cevaplar[q.id];
-    div.innerHTML = `<div class="q-text">${q.soru}</div>
+    div.innerHTML = `<div class="q-text"><span style="color:var(--jasper);font-weight:700;margin-right:8px;">${idx+1}.</span>${q.soru}</div>
       <div class="ans-grid">
         ${["evet","kismen","hayir","bilmiyorum"].map(k => {
           const labels = {evet:"Evet", kismen:"Kısmen", hayir:"Hayır", bilmiyorum:"Bilmiyorum"};
