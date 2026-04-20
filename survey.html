@@ -601,10 +601,10 @@ function hesaplaToplamSkor(sonuclar) {
 }
 
 function profilBul(skor) {
-  if (skor < 2) return { isim: "Uzak", icon: "👤", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi uzaktan tanıyor ve bağınız henüz başlangıç seviyesinde👤" };
-  if (skor < 3) return { isim: "Kararsız", icon: "🤔", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi tanıyor fakat sizinle devam edip etmeme konusunda kararsız🤔" };
-  if (skor < 4) return { isim: "Memnun", icon: "🙂", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi tanıyor ve genel olarak deneyiminden memnun🙂" };
-return { isim: "Sadık", icon: "💙", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi iyi tanıyor. Sizi tercih ediyor ve sizinle devam ediyor." };
+  if (skor < 2) return { isim: "Uzak", icon: "\uD83D\uDC64", aciklama: "Verdi\u011finiz yan\u0131tlara g\u00f6re m\u00fc\u015fteriniz sizi uzaktan tan\u0131yor, ba\u011f\u0131n\u0131z hen\u00fcz ba\u015flang\u0131\u00e7 seviyesinde \uD83D\uDC64" };
+  if (skor < 3) return { isim: "Karas\u0131z", icon: "\uD83E\uDD14", aciklama: "Verdi\u011finiz yan\u0131tlara g\u00f6re m\u00fc\u015fteriniz sizi tan\u0131yor fakat sizinle devam edip etmeme konusunda karas\u0131z \uD83E\uDD14" };
+  if (skor < 4) return { isim: "Memnun", icon: "\uD83D\uDE42", aciklama: "Verdi\u011finiz yan\u0131tlara g\u00f6re m\u00fc\u015fteriniz sizi tan\u0131yor ve genel olarak deneyiminden memnun \uD83D\uDE42" };
+  return { isim: "Sad\u0131k", icon: "\uD83D\uDC99", aciklama: "Verdi\u011finiz yan\u0131tlara g\u00f6re m\u00fc\u015fteriniz sizi iyi tan\u0131yor ve s\u0131kl\u0131kla tercih ediyor \uD83D\uDC99" };
 }
 function renderResults(sonuclar) {
   const toplamSkor = hesaplaToplamSkor(sonuclar);
