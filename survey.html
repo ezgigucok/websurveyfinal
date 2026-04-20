@@ -601,10 +601,10 @@ function hesaplaToplamSkor(sonuclar) {
 }
 
 function profilBul(skor) {
-  if (skor < 2) return { isim: "Uzak", icon: "👤", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi uzaktan tanıyor. Bağınız henüz başlangıç seviyesinde." };
-  if (skor < 3) return { isim: "Kararsız", icon: "🤔", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi tanıyor. Ancak sizinle devam edip etmeme konusunda net değil." };
-  if (skor < 4) return { isim: "Memnun", icon: "🙂", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi tanıyor. Genel olarak deneyiminden memnun." };
-  return { isim: "Sadık", icon: "💙", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi iyi tanıyor. Sizi tercih ediyor ve sizinle devam ediyor." };
+  if (skor < 2) return { isim: "Uzak", icon: "👤", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi uzaktan tanıyor ve bağınız henüz başlangıç seviyesinde👤" };
+  if (skor < 3) return { isim: "Kararsız", icon: "🤔", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi tanıyor fakat sizinle devam edip etmeme konusunda kararsız🤔" };
+  if (skor < 4) return { isim: "Memnun", icon: "🙂", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi tanıyor ve genel olarak deneyiminden memnun🙂" };
+  return { isim: "Sadık", icon: "💙", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi iyi tanıyor ve sürekli sizi tercih ediyor💙 };
 }
 
 function renderResults(sonuclar) {
