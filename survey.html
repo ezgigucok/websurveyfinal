@@ -34,9 +34,7 @@ body { font-family: 'Rethink Sans', sans-serif; background: var(--bg); color: va
 
 /* STEP DOTS */
 .step-dots { display: flex; gap: 8px; margin-bottom: 2rem; }
-.step-dot { width: 32px; height: 4px; border-radius: 999px; background: var(--border); transition: background 0.3s; }
-.step-dot.active { background: var(--jasper); }
-.step-dot.done { background: var(--cloud); }
+
 
 /* CARD */
 .card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 2rem; margin-bottom: 1rem; }
@@ -456,10 +454,6 @@ function show(id) { document.getElementById(id).style.display = ""; }
 function hide(id) { document.getElementById(id).style.display = "none"; }
 
 function updateDots(active) {
-  [0,1,2].forEach(i => {
-    const d = document.getElementById("dot-"+i);
-    d.className = "step-dot" + (i < active ? " done" : i === active ? " active" : "");
-  });
   document.getElementById("prog-label").textContent = (active+1) + " / 3";
   document.getElementById("prog-fill").style.width = Math.round((active+1)/3*100) + "%";
 }
