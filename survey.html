@@ -110,8 +110,8 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
 
 /* LEVEL BAR */
 .level-bar { display: flex; }
-.level-bar-item { flex: 1; padding: 8px 4px; text-align: center; font-size: 11px; font-weight: 600; cursor: default; }
-.level-bar-item.active { opacity: 1; }
+.level-bar-item { flex: 1; padding: 9px 4px; text-align: center; font-size: 10px; font-weight: 600; cursor: default; }
+.level-bar-item.active { opacity: 1; font-size: 13px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .level-bar-item.inactive { opacity: 0.35; }
 
 /* Tanıma colors */
@@ -130,7 +130,8 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
 .yaklasim-high { background: var(--cloud); color: #fff; }
 
 .score-card-body { padding: 1.25rem; }
-.score-icon { font-size: 24px; margin-bottom: 8px; }
+.score-header-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.score-icon { font-size: 22px; }
 .score-alan { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; }
 .score-seviye { font-size: 18px; font-weight: 700; color: var(--cloud); margin-bottom: 12px; }
 .score-yorum { font-size: 13px; color: var(--text); line-height: 1.65; white-space: pre-line; }
@@ -145,6 +146,30 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
 .cta-secondary { display: block; margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; }
 .cta-secondary:hover { color: rgba(255,255,255,0.9); }
 .tesekkur-msg { font-size: 16px; color: var(--white); line-height: 1.7; }
+
+/* SKOR HEADER — unified */
+.skor-header { background: var(--lavender); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+.skor-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(46,48,76,0.1); }
+.profil-items { display: flex; gap: 20px; align-items: center; }
+.profil-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.profil-item .pi-icon { font-size: 20px; }
+.profil-item .pi-name { font-size: 13px; font-weight: 700; color: var(--cloud); }
+.profil-item .pi-range { font-size: 11px; color: var(--text-muted); }
+.profil-item.inactive { opacity: 0.25; }
+.profil-item.active { opacity: 1; }
+.gucok-logo { width: 32px; height: auto; }
+.skor-header-bottom { display: flex; align-items: center; gap: 1.5rem; }
+.skor-aciklama { flex: 2; font-size: 15px; color: var(--cloud); line-height: 1.7; padding-right: 1rem; }
+.skor-kutu { background: var(--cloud); border-radius: var(--radius-sm); padding: 0.75rem 1rem; text-align: center; min-width: 110px; max-width: 140px; flex-shrink: 0; }
+.skor-kutu .sk-num { font-size: 28px; font-weight: 700; color: var(--white); line-height: 1; }
+.skor-kutu .sk-label { font-size: 10px; color: rgba(255,255,255,0.7); margin-top: 6px; line-height: 1.4; max-width: 120px; }
+
+/* CTA updated */
+.cta-block { background: var(--cloud); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 2rem; }
+.cta-left { flex: 1; }
+.cta-block h3 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.cta-block p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+@media(max-width:560px) { .cta-block { flex-direction: column; } .skor-blok { flex-direction: column; } }
 
 /* THANKS PAGE */
 .thanks-wrap { text-align: center; padding: 2rem; animation: fadeUp 0.4s ease; }
@@ -262,7 +287,7 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
     <div class="section-header">
       <div class="section-num">1. Bölüm</div>
       <div class="section-title">Tanıma 🧠</div>
-      <div class="section-desc">Bu bölümde, müşteriyle ilgili bilginin ne kadar sistematik toplandığına, nerede durduğuna ve kararlarınıza ne ölçüde yansıdığına bakılmaktadır</div>
+      <div class="section-desc">Bu bölümde, müşteriyle ilgili bilginin ne kadar sistematik toplandığına, nerede durduğuna ve kararlarınıza ne ölçüde yansıdığına bakıyoruz.</div>
     </div>
     <div id="q-tanima"></div>
     <div class="nav-row">
@@ -276,7 +301,7 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
     <div class="section-header">
       <div class="section-num">2. Bölüm</div>
       <div class="section-title">İlişki 🤝</div>
-      <div class="section-desc">Bu bölümde, müşteriyle kurduğunuz temasın ne kadar tutarlı ve yönetilebilir olduğuna bakılmaktadır</div>
+      <div class="section-desc">Bu bölümde, müşteriyle kurduğunuz temasın ne kadar tutarlı ve yönetilebilir olduğuna bakıyoruz.</div>
     </div>
     <div id="q-iliski"></div>
     <div class="nav-row">
@@ -290,7 +315,7 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
     <div class="section-header">
       <div class="section-num">3. Bölüm</div>
       <div class="section-title">Yaklaşım 🎯</div>
-      <div class="section-desc">Bu bölümde, müşteri odaklılığın sadece değer listesinde değil; günlük kararlarda ve iş yapış şeklinizde ne kadar yer kapladığına bakılmaktadır</div>
+      <div class="section-desc">Bu bölümde, müşteri odaklılığın sadece değer listesinde değil; günlük kararlarda ve iş yapış şeklinizde ne kadar yer kapladığına bakıyoruz.</div>
     </div>
     <div id="q-yaklasim"></div>
     <div class="nav-row">
@@ -326,8 +351,15 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
   <!-- RESULTS -->
   <div id="step-results" style="display:none">
     <div class="results-wrap">
-      <div class="results-intro">
-        <p>Bu sonuçlar müşterinizi ne kadar tanıdığınızı, onunla nasıl bir ilişki kurduğunuzu ve herhangi bir karar anında müşteriye yaklaşımınızın nasıl şekillendiğini gösteriyor.<br><br>Doğru yerden başlamak, bu tabloyu iyi yönde değiştirmenin en hızlı yolu.</p>
+      <div class="skor-header">
+        <div class="skor-header-top">
+          <div class="profil-items" id="profil-items"></div>
+          <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjkyLjQxIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2Q1MzU0ZDt9LmNscy0ye2ZpbGw6IzJlMzA0Yzt9PC9zdHlsZT48L2RlZnM+PGcgaWQ9IkxheWVyXzEtMiI+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMjUwLDI0MC41OWwtMjguMDUsNDguNzljLTIwLjc0LTExLjg5LTQ2LjE1LTIwLjk5LTkxLjQ2LTYuOTEtMTYuOTEsNC45Ny0zNi40NSw5Ljk1LTU2LjMsOS45NS0xOC40NSwwLTM2LjQtNi45MS01MC4xMy0xOS40NUM4LjgsMjU4Ljk0LDAsMjM5LDAsMjE4LjI2YzAtMy43OC4zLTcuNDYuODUtMTEuMDksNS4zNy0zNS42MSwzNi4yLTYzLjAxLDczLjMtNjMuMDFoMjIuODNsMjYuMjEsNTYuM2gtNDkuMDRjLTkuODUsMC0xNy44NSw4LjAxLTE3Ljg1LDE3LjgsMCw2Ljg2LDMuNjMsMTEuMTksNS44MiwxMy4xOCwyLjE0LDEuOTksNi43Niw0Ljg3LDEzLjYzLDQuNjIsMTQuMTItLjYsMjYuMTYtMy42OCwzOC4wNC03LjM2LDUxLjE3LTE1LjkxLDk0LjQ0LTEyLjEzLDEzNi4yMiwxMS44OVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik02Mi4xLDIzMS40MmMyLjE0LDEuOTksNi43Niw0Ljg3LDEzLjYzLDQuNjMsMCwwLTExLjg0LDIuMTktMjYuNDEuOS0zNi43LTMuMTgtNTIuMzctNDguMzktMjUuMjEtNzMuMywxMy4xOC0xMi4wOCwzMC43OC0xOS40OSw1MC4wMy0xOS40OWgyMi44M2w5LjIsMTkuNzQsMTcuMDEsMzYuNTVoLTQ5LjAzYy05Ljg1LDAtMTcuODUsOC4wMS0xNy44NSwxNy44LDAsMS42NC4yLDMuMTguNTUsNC41My4wNS4wNS4wNS4xLjA1LjE1LjY1LDIuNDQsMS43NCw0LjQzLDIuOTMsNS45Mi4wNS4wNS4wNS4xLjA1LjEuNzUsMS4wNCwxLjU5LDEuODksMi4yNCwyLjQ5WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTIwOC41MSw3Ni4xOWwtMzcuMjktMzYuMTNjNy44NS03LjQzLDE3LjIyLTE5LjYzLDE3LjIyLTM1LjU2aDUyLjg1YzAsMjYuMjQtMTEuNjQsNTEuNy0zMi43OCw3MS42OVoiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0xOS45MywxMDAuMjNDMTkuOTMsNDMuMTcsNjQuMjMsMCwxMjMuMTcsMHMxMDMuMjQsNDMuMTcsMTAzLjI0LDEwMC4yMy00NC4zLDEwMC4yMy0xMDMuMjQsMTAwLjIzUzE5LjkzLDE1Ny4yOSwxOS45MywxMDAuMjNaTTE3MC4wOSwxMDAuMjNjMC0yNy4wMy0xOS45LTQ3LjMtNDYuOTItNDcuM3MtNDYuOTIsMjAuMjctNDYuOTIsNDcuMywxOS45LDQ3LjMsNDYuOTIsNDcuMyw0Ni45Mi0yMC4yNyw0Ni45Mi00Ny4zWiIvPjwvZz48L3N2Zz4=" class="gucok-logo" alt="Gucok"/>
+        </div>
+        <div class="skor-header-bottom">
+          <div class="skor-aciklama" id="skor-aciklama"></div>
+          <div class="skor-kutu" id="skor-kutu"></div>
+        </div>
       </div>
 
       <div class="score-grid">
@@ -335,12 +367,12 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
         <div class="score-card" id="card-iliski"></div>
         <div class="score-card" id="card-yaklasim"></div>
       </div>
-
       <div class="cta-block" id="cta-block">
-        <h3>Nereden Başlayacağınıza Birlikte Karar Verelim</h3>
-        <p>Her sonuç hem müşteriniz hem de firmanız için fırsat barındırıyor. 30 dakikada hangisinden başlayacağınızı konuşalım.</p>
-        <button class="cta-btn" id="gorus-btn" onclick="gorusmePlanla()">Ücretsiz Görüşme Planla →</button>
-        <a href="https://www.gucok.com" target="_blank" class="cta-secondary">Güçok hakkında daha fazla bilgi almak için →</a>
+        <div class="cta-left">
+          <h3>Nereden Başlayacağınıza Birlikte Karar Verelim</h3>
+          <p>Her sonuç hem müşteriniz hem de firmanız için fırsat barındırıyor. 30 dakikada hangisinden başlayacağınızı konuşalım.</p>
+        </div>
+        <button class="cta-btn" id="gorus-btn" onclick="gorusmePlanla()">Üretsiz Görüşme Planla →</button>
       </div>
     </div>
   </div>
@@ -367,7 +399,7 @@ const SORULAR = {
   tanima: [
     { id:"t1", agirlik:3, soru:"Müşteri bilgisi yalnızca satış veya satış öncesinde değil, satış sonrası temaslarda da düzenli olarak kayıt altına alınır." },
     { id:"t2", agirlik:3, soru:"Bir müşteri hakkında geçmiş bilgiye ihtiyaç duyulduğunda bu bilgiye tek bir yerden erişilebilir." },
-    { id:"t3", agirlik:3, soru:"Müşteriyle yapılan görüşmeler sonrası elde edilen bilgiler her zaman kayıt altına alınır." },
+    { id:"t3", agirlik:3, soru:"Müşteriyle yapılan görüşmeler sonrası elde edilen bilgiler kayıt altına alınmadan bırakılmaz." },
     { id:"t4", agirlik:2, soru:"\"Bizim müşteri segmentlerimiz nedir?\" sorusuna tüm firma içinde benzer cevaplar verilir." },
     { id:"t5", agirlik:2, soru:"Farklı müşteri grupları için ne yapılacağı yorumlarla değişmez, nettir ve herkes tarafından erişilebilir." },
     { id:"t6", agirlik:1, soru:"Müşteri verisi yalnızca raporlanmaz, bir şeyi değiştirmek için kullanılır." },
@@ -389,21 +421,21 @@ const SORULAR = {
 
 const YORUMLAR = {
   tanima: {
-    "Kısmen": "Müşterinizi kısmen tanıyorsunuz.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nAynı müşteri birkaç ay arayla tekrar geliyor.\nDaha önce ne satın aldığı, neden tercih ettiği ya da neden uzaklaştığı net değil.\nSiz yeniden teklif veriyorsunuz ama aslında müşterinin neye ihtiyacı olduğu biraz tahminle ilerliyor.\nBazı müşterileri doğru yerden yakalasanız bile bazılarını fark etmeden kaçırıyorsunuz.",
-    "İyi": "Müşterinizi iyi tanıyorsunuz.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nKilit müşterinizle yıllardır çalışan ekip arkadaşınız işten ayrıldı. Müşterinin dosyası, bilgileri ve geçmiş yazışmaları var. Fakat gerçek bilgi, mesela müşterinin ne zaman hassas olduğu, neye değer verdiği veya hangi konuşmadan sonra ne beklediği hiçbir yerde yazılı değil.\nBilgi var, ama sisteme değil insana bağlı. Kişi gidince bilgi de gidiyor.",
-    "Çok İyi": "Müşterinizi çok iyi tanıyorsunuz.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nMüşteriniz yıllardır sizinle çalışıyor. Ekipten kim değişirse değişsin, müşteri her seferinde kendini yeniden anlatmak zorunda kalmıyor. Geçmiş ne, beklenti ne, hangi konularda hassas gibi bilgiler sistemde.\n\nMüşteri henüz bir şey söylemeden siz zaten fark ediyor ve aksiyon alıyorsunuz. Bir sorun çıkmadan önce görüyorsunuz.\nMüşteri bunu her zaman dile getirmez fakat çoğunlukla \"bunlarla çalışmak kolay\" diye düşünür.",
+    "Kısmen": "Aynı müşteri birkaç ay arayla tekrar geliyor.\nDaha önce ne satın aldığı, neden tercih ettiği ya da neden uzaklaştığı net değil.\nSiz yeniden teklif veriyorsunuz ama aslında müşterinin neye ihtiyacı olduğu biraz tahminle ilerliyor.\nBazı müşterileri doğru yerden yakalasaniz bile bazılarını fark etmeden kaçırıyorsunuz.",
+    "İyi": "Yıllardır önemli müşterinizle çalışan ekip arkadaşınız işten ayrıldı.\nMüşterinin dosyası, bilgileri ve geçmiş yazışmaları var. Fakat müşterinin ne zaman hassas olduğu, neye değer verdiği veya hangi konuşmadan sonra ne beklediği hiçbir yerde yazılı değil.\nBilgi var, ama sisteme değil insana bağlı. Kişi gidince bilgi de gidiyor.",
+    "Çok İyi": "Müşteriniz yıllardır sizinle çalışıyor.\nEkipten biri de ayrılsa süreç de değişse müşteri bundan olumsuz anlamda etkilenmiyor.\nMüşteri henüz bir şey söylemeden siz zaten fark ediyor ve aksiyon alıyorsunuz.\nMüşteriniz bunu her zaman dile getirmese de çoğunlukla “çalışmak ne kadar kolay” diye düşünür.",
   },
   iliski: {
-    "Kopuk": "Müşterinizle ilişkiniz kopuk ilerliyor.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nMüşteri bir sorunla geliyor. Önce satış ekibine ulaşıyor, oradan destek ekibine yönlendiriliyor, oradan başka birine. Her seferinde aynı şeyi yeniden anlatıyor.\nSonunda sorun çözülüyor olabilir. Ama o süreçte müşteri ne hissetti diye soracak olursak \"Bu şirketle iş yapmak yorucu\" diyecektir.\nTemas noktaları var ama birbirinden habersiz. Müşteri sistemi değil, şansını deniyor.",
-    "Yönetilebilir": "Müşterinizle ilişkiniz yönetilebilir düzeyde.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nYılın en yoğun döneminde iki ekip üyeniz aynı anda izne çıktı. O hafta müşterilerden gelen talepler yığıldı, bazıları yanıtsız kaldı, bazılarına geç dönüldü.\nMüşteri şikayet etmedi belki. Ama bir sonraki toplantıda \"sizi bulmak bazen zor oluyor\" dedi.\nİlişki kurulmuş — ama kişiye ve kapasiteye bağlı. Sistem zorlandığında ilk görünen yer burası oluyor.",
-    "Oturmuş": "Müşterinizle ilişkiniz oturmuş durumda.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nRakibiniz o büyük müşterinize daha iyi bir fiyat teklif etti. Müşteri size gelip söyledi.\nBu küçük bir jest gibi görünüyor ama aslında değil. Müşteri sizi tercih etmek istiyor ve bunu haklı çıkaracak bir sebep arıyor.\nÇünkü sizinle olan ilişkisi fiyatın ötesinde. Ne zaman ulaşacağını, kimin ilgileneceğini, nasıl ilerleyeceğini biliyor. Bu öngörülebilirlik, rakibin teklifinden daha değerli. Rakibin fiyatı cazip olsa da bilinen bir yoldan çıkmak kolay değil.",
+    "Kopuk": "Müşteri bir sorunla geliyor.\nÖnce satış ekibine ulaşıyor, oradan destek ekibine yönlendiriliyor, oradan başka birine.\nTemas noktaları var ama birbirinden habersiz.\nHer seferinde aynı şeyi yeniden anlatıyor.\nSonunda sorun çözülüyor olsa da müşteri “Bu şirketle iş yapmak yorucu” diyecektir.",
+    "Yönetilebilir": "Yılın en yoğun döneminde iki ekip üyeniz aynı anda izne çıktı.\nO hafta müşterilerden gelen talepler yığıldı, bazıları yanıtsız kaldı, bazılarına geç dönüldü.\nMüşteri şikayet etmedi belki; fakat bir sonraki talebinde “sizi bulmak bazen zor oluyor” diyecektir.",
+    "Oturmuş": "Rakibiniz müşterinize daha iyi bir fiyatla gidiyor.\nMüşteri teklifi alıyor ama karar vermeden önce sizi arıyor: “Sizinle nasıl ilerlediğimizi biliyorum, orada neyle karşılaşacağımı bilmiyorum”\nÇünkü sizinle çalışmak onun için sadece sonuç değil, sürecin kendisi.\nFiyat daha iyi olsa da bildiği ve güvendiği ilişkiyi bırakmak istemiyor.",
   },
   yaklasim: {
-    "Değişken": "Müşteri yaklaşımınız değişken.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nŞirket zor bir dönemden geçiyor. Hedefler baskı altında, gündem yoğun.\nO çeyrekte alınan birkaç kritik karar var: Fiyatlandırma, önceliklendirme, kaynak dağılımı.\nToplantılarda müşterinin adı pek geçmedi. Geçmedi çünkü o an için \"lüks\" gibi hissettirdi.\nSonraki çeyrekte her şey normale döndü, müşteri odaklılık yeniden gündemde.\nYaklaşım içten geliyor ama baskı altında ilk geri çekilen şeylerden biri.",
-    "Dikkatli": "Müşteri yaklaşımınız dikkatli.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nÖnemli bir karar masada. Fiyat mı artırılsın, teslimat süresi mi uzasın, yoksa bir özellik mi kaldırılsın.\nToplantıda biri soruyor: \"Peki müşteri bu değişikliği nasıl karşılar?\" Kısa bir sessizlik. Sonra tartışma başlıyor.\nSoru soruluyor ama cevap çoğu zaman veriye değil sezgiye dayanıyor. Kimse konunun olası etkilerini müşteriyle konuşmadı, kimse test etmedi. \"Büyük ihtimalle anlar\" ile devam ediliyor.\nFarkındalık var fakat sistematik değil.",
-    "Belirleyici": "Müşteri yaklaşımınız belirleyici.\n\nNe demek olduğunu bir örnekle açıklayalım:\n\nŞirket çağrı merkezi süreçlerini dijitalleştirmeye karar verdi. Projenin başında birçok ekip aynı soruyu sordu: \"Müşteri talep/şikayet iletmek istediğinde ne yapacak?\"\nCevap çoktan hazırdı, çünkü bu soru tasarım aşamasında müşteri perspektifinden geçirilmişti. Talebin nereye gideceği, kimin devralacağı, müşteriye ne zaman dönüleceği baştan tanımlanmıştı.\nSistem devreye girdi. Müşteri talebini iletti ve ilk kez \"bu kadar hızlı mı çözülür?\" diye şaşırdı.\nİçeride büyük bir değişim olmuştu. Müşteri ise sadece sonucu gördü.",
-  }
-};
+    "Değişken": "Şirket zor bir dönemden geçiyor; hedefler baskı altında, gündem yoğun.\nToplantılarda müşterinin adı pek geçmedi çünkü o an için “lüks” gibi hissettirdi.\nSonraki çeyrekte her şey normale döndü, müşteri odaklılık yeniden gündeme geldi.\nYaklaşım içten geliyor ama baskı altında ilk geri çekilen şeylerden biri müşterinin ne düşündüğü.",
+    "Dikkatli": "Önemli bir karar alınacak.\n“Müşteri bunu nasıl karşılar?” sorusu soruluyor.\nKısa bir değlendirme yapılıyor ama herkes kendi deneyimine göre konuşuyor.\nKarar, kesinlikten çok tahminle veriliyor.",
+    "Belirleyici": "Yeni bir süreç tasarılanıyor.\nDaha ilk anda herkes aynı soruyla başlıyor: “Müşteri burada ne yaşayacak?”\nTüm adımlar buna göre netleştiriliyor. Sistem devreye girdiğinde müşteri hiçbir şey sormadan süreci tamamlıyor.\nİçeride büyük bir değişim oluyor.\nMüşteri sadece şunu hissediyor: “Her şey olması gerektiği gibi.”",
+  },
+}
 
 const ESIKLER = {
   tanima:   [[0,17,"Kısmen"],[18,32,"İyi"],[33,42,"Çok İyi"]],
@@ -563,27 +595,67 @@ function goToResults() {
   }, 1200);
 }
 
+function hesaplaToplamSkor(sonuclar) {
+  const maxlar = { tanima: 42, iliski: 39, yaklasim: 18 };
+  const agirliklar = { tanima: 0.40, iliski: 0.35, yaklasim: 0.25 };
+  let toplam = 0;
+  ["tanima","iliski","yaklasim"].forEach(function(a) {
+    const norm = (sonuclar[a].skor / maxlar[a]) * 5;
+    toplam += norm * agirliklar[a];
+  });
+  return Math.round(toplam * 10) / 10;
+}
+
+function profilBul(skor) {
+  if (skor < 2) return { isim: "Uzak", icon: "👤", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi uzaktan tanıyor. Bağınız henüz başlangıç seviyesinde." };
+  if (skor < 3) return { isim: "Kararsız", icon: "🤔", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi tanıyor. Ancak sizinle devam edip etmeme konusunda net değil." };
+  if (skor < 4) return { isim: "Memnun", icon: "🙂", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi tanıyor. Genel olarak deneyiminden memnun." };
+  return { isim: "Sadık", icon: "💙", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi iyi tanıyor. Sizi tercih ediyor ve sizinle devam ediyor." };
+}
+
 function renderResults(sonuclar) {
-  ["tanima","iliski","yaklasim"].forEach(alan => {
+  const toplamSkor = hesaplaToplamSkor(sonuclar);
+  const profil = profilBul(toplamSkor);
+
+  const profiller = [
+    { isim: "Uzak", icon: "👤", aralik: "0-2" },
+    { isim: "Kararsız", icon: "🤔", aralik: "2-3" },
+    { isim: "Memnun", icon: "🙂", aralik: "3-4" },
+    { isim: "Sadık", icon: "💙", aralik: "4-5" },
+  ];
+
+  document.getElementById("profil-items").innerHTML = profiller.map(function(p) {
+    const active = p.isim === profil.isim;
+    return '<div class="profil-item ' + (active ? "active" : "inactive") + '">'
+      + '<span class="pi-icon">' + p.icon + '</span>'
+      + '<span class="pi-name">' + p.isim + '</span>'
+      + '<span class="pi-range">' + p.aralik + '</span>'
+      + '</div>';
+  }).join("");
+
+  document.getElementById("skor-aciklama").innerHTML = profil.aciklama.replace(/\n/g, "<br>");
+  document.getElementById("skor-kutu").innerHTML =
+    '<div class="sk-num">' + toplamSkor.toFixed(1) + '/5</div>'
+    + '<div class="sk-label">Bu skor, müşterinizle kurduğunuz ilişkinin seviyesini gösterir.</div>';
+
+  ["tanima","iliski","yaklasim"].forEach(function(alan) {
     const { seviye } = sonuclar[alan];
     const meta = ALAN_META[alan];
     const yorum = YORUMLAR[alan][seviye] || "";
     const card = document.getElementById("card-"+alan);
     const levelIdx = meta.levels.indexOf(seviye);
 
-    const barHTML = meta.levels.map((l, i) => {
+    const barHTML = meta.levels.map(function(l, i) {
       const active = i === levelIdx;
-      return `<div class="level-bar-item ${meta.cls}-${i===0?"low":i===1?"mid":"high"} ${active?"active":"inactive"}">${l}</div>`;
+      return '<div class="level-bar-item ' + meta.cls + '-' + (i===0?"low":i===1?"mid":"high") + ' ' + (active?"active":"inactive") + '">' + l + '</div>';
     }).join("");
 
-    card.innerHTML = `
-      <div class="level-bar">${barHTML}</div>
-      <div class="score-card-body">
-        <div class="score-icon">${meta.icon}</div>
-        <div class="score-alan">${meta.label}</div>
-        <div class="score-seviye">${meta.soru}</div>
-        <div class="score-yorum">${yorum}</div>
-      </div>`;
+    card.innerHTML =
+      '<div class="level-bar">' + barHTML + '</div>'
+      + '<div class="score-card-body">'
+      + '<div class="score-header-row"><span class="score-icon">' + meta.icon + '</span><span class="score-alan" style="font-size:22px;font-weight:700;color:#2e304c;">' + meta.label + '</span></div>'
+      + '<div class="score-yorum">' + yorum + '</div>'
+      + '</div>';
   });
 }
 
