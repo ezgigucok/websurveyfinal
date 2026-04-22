@@ -35,7 +35,6 @@ body { font-family: 'Rethink Sans', sans-serif; background: var(--bg); color: va
 /* STEP DOTS */
 .step-dots { display: flex; gap: 8px; margin-bottom: 2rem; }
 
-
 /* CARD */
 .card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 2rem; margin-bottom: 1rem; }
 
@@ -135,17 +134,16 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
 .score-yorum { font-size: 13px; color: var(--text); line-height: 1.65; white-space: pre-line; }
 
 /* CTA BLOCK */
-.cta-block { background: var(--cloud); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; }
-.cta-block h3 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
-.cta-block p { font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; line-height: 1.6; }
-.cta-btn { display: inline-block; padding: 12px 28px; background: var(--jasper); color: var(--white); border-radius: var(--radius-sm); font-family: 'Rethink Sans', sans-serif; font-size: 14px; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: background 0.15s; }
+.cta-block { background: var(--cloud); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 2rem; }
+.cta-left { flex: 1; }
+.cta-block h3 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.cta-block p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; margin-bottom: 0; }
+@media(max-width:560px) { .cta-block { flex-direction: column; } }
+.cta-btn { display: inline-block; padding: 12px 28px; background: var(--jasper); color: var(--white); border-radius: var(--radius-sm); font-family: 'Rethink Sans', sans-serif; font-size: 14px; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: background 0.15s; white-space: nowrap; }
 .cta-btn:hover { background: #b8293f; }
 .cta-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-.cta-secondary { display: block; margin-top: 12px; font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; }
-.cta-secondary:hover { color: rgba(255,255,255,0.9); }
-.tesekkur-msg { font-size: 16px; color: var(--white); line-height: 1.7; }
 
-/* SKOR HEADER — unified */
+/* SKOR HEADER */
 .skor-header { background: var(--lavender); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
 .skor-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(46,48,76,0.1); }
 .profil-items { display: flex; gap: 20px; align-items: center; }
@@ -161,13 +159,6 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
 .skor-kutu { background: var(--cloud); border-radius: var(--radius-sm); padding: 0.75rem 1rem; text-align: center; min-width: 110px; max-width: 140px; flex-shrink: 0; }
 .skor-kutu .sk-num { font-size: 28px; font-weight: 700; color: var(--white); line-height: 1; }
 .skor-kutu .sk-label { font-size: 10px; color: rgba(255,255,255,0.7); margin-top: 6px; line-height: 1.4; max-width: 120px; }
-
-/* CTA updated */
-.cta-block { background: var(--cloud); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 2rem; }
-.cta-left { flex: 1; }
-.cta-block h3 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
-.cta-block p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; }
-@media(max-width:560px) { .cta-block { flex-direction: column; } .skor-blok { flex-direction: column; } }
 
 /* THANKS PAGE */
 .thanks-wrap { text-align: center; padding: 2rem; animation: fadeUp 0.4s ease; }
@@ -332,12 +323,11 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
       </div>
       <div class="kvkk-row">
         <input type="checkbox" id="kvkk-check"/>
-<label for="kvkk-check"><a href="https://www.gucok.com/aydinlatma-metni-gizlilik-politikasi/" target="_blank">Aydınlatma Metni ve Gizlilik Politikasını</a> okudum. Analiz sonuçlarımın değerlendirilmesi ve bu kapsamda tarafıma danışmanlık/iletişim sağlanması amacıyla bilgilerimin işlenmesini kabul ediyorum.</label>      <button class="btn-next" style="width:100%" onclick="submitEmail()">Sonuçlarımı Gör →</button>
-       <div id="kvkk-error" style="display:none;color:#d5354d;font-size:13px;margin-top:6px;">Sonuçlarınızı görüntülemek için işaretlemeniz gerekmektedir.</div>
+        <label for="kvkk-check"><a href="https://www.gucok.com/aydinlatma-metni-gizlilik-politikasi/" target="_blank">Aydınlatma Metni ve Gizlilik Politikasını</a> okudum. Analiz sonuçlarımın değerlendirilmesi ve bu kapsamda tarafıma danışmanlık/iletişim sağlanması amacıyla bilgilerimin işlenmesini kabul ediyorum.</label>
       </div>
-      </label>
-<button class="btn-next" style="width:100%" onclick="submitEmail()">Sonuçlarımı Gör →</button>
-<div id="kvkk-error" style="display:none;color:#d5354d;font-size:13px;margin-top:6px;">Sonuçlarınızı görüntülemek için işaretlemeniz gerekmektedir.</div>
+      <div id="kvkk-error" style="display:none;color:#d5354d;font-size:13px;margin-bottom:12px;">Sonuçlarınızı görüntülemek için işaretlemeniz gerekmektedir.</div>
+      <button class="btn-next" style="width:100%" onclick="submitEmail()">Sonuçlarımı Gör →</button>
+    </div>
   </div>
 
   <!-- LOADING -->
@@ -367,6 +357,7 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
         <div class="score-card" id="card-iliski"></div>
         <div class="score-card" id="card-yaklasim"></div>
       </div>
+
       <div class="cta-block" id="cta-block">
         <div class="cta-left">
           <h3>Nereden Başlayacağınıza Birlikte Karar Verelim</h3>
@@ -423,19 +414,19 @@ const YORUMLAR = {
   tanima: {
     "Kısmen": "Aynı müşteri birkaç ay arayla tekrar geliyor.\nDaha önce ne satın aldığı, neden tercih ettiği ya da neden uzaklaştığı net değil.\nSiz yeniden teklif veriyorsunuz ama aslında müşterinin neye ihtiyacı olduğu biraz tahminle ilerliyor.\nBazı müşterileri doğru yerden yakalasaniz bile bazılarını fark etmeden kaçırıyorsunuz.",
     "İyi": "Yıllardır önemli müşterinizle çalışan ekip arkadaşınız işten ayrıldı.\nMüşterinin dosyası, bilgileri ve geçmiş yazışmaları var. Fakat müşterinin ne zaman hassas olduğu, neye değer verdiği veya hangi konuşmadan sonra ne beklediği hiçbir yerde yazılı değil.\nBilgi var, ama sisteme değil insana bağlı. Kişi gidince bilgi de gidiyor.",
-    "Çok İyi": "Müşteriniz yıllardır sizinle çalışıyor.\nEkipten biri de ayrılsa süreç de değişse müşteri bundan olumsuz anlamda etkilenmiyor.\nMüşteri henüz bir şey söylemeden siz zaten fark ediyor ve aksiyon alıyorsunuz.\nMüşteriniz bunu her zaman dile getirmese de çoğunlukla “çalışmak ne kadar kolay” diye düşünür.",
+    "Çok İyi": "Müşteriniz yıllardır sizinle çalışıyor.\nEkipten biri de ayrılsa süreç de değişse müşteri bundan olumsuz anlamda etkilenmiyor.\nMüşteri henüz bir şey söylemeden siz zaten fark ediyor ve aksiyon alıyorsunuz.\nMüşteriniz bunu her zaman dile getirmese de çoğunlukla \"çalışmak ne kadar kolay\" diye düşünür.",
   },
   iliski: {
-    "Kopuk": "Müşteri bir sorunla geliyor.\nÖnce satış ekibine ulaşıyor, oradan destek ekibine yönlendiriliyor, oradan başka birine.\nTemas noktaları var ama birbirinden habersiz.\nHer seferinde aynı şeyi yeniden anlatıyor.\nSonunda sorun çözülüyor olsa da müşteri “Bu şirketle iş yapmak yorucu” diyecektir.",
-    "Yönetilebilir": "Yılın en yoğun döneminde iki ekip üyeniz aynı anda izne çıktı.\nO hafta müşterilerden gelen talepler yığıldı, bazıları yanıtsız kaldı, bazılarına geç dönüldü.\nMüşteri şikayet etmedi belki; fakat bir sonraki talebinde “sizi bulmak bazen zor oluyor” diyecektir.",
-    "Oturmuş": "Rakibiniz müşterinize daha iyi bir fiyatla gidiyor.\nMüşteri teklifi alıyor ama karar vermeden önce sizi arıyor: “Sizinle nasıl ilerlediğimizi biliyorum, orada neyle karşılaşacağımı bilmiyorum”\nÇünkü sizinle çalışmak onun için sadece sonuç değil, sürecin kendisi.\nFiyat daha iyi olsa da bildiği ve güvendiği ilişkiyi bırakmak istemiyor.",
+    "Kopuk": "Müşteri bir sorunla geliyor.\nÖnce satış ekibine ulaşıyor, oradan destek ekibine yönlendiriliyor, oradan başka birine.\nTemas noktaları var ama birbirinden habersiz.\nHer seferinde aynı şeyi yeniden anlatıyor.\nSonunda sorun çözülüyor olsa da müşteri \"Bu şirketle iş yapmak yorucu\" diyecektir.",
+    "Yönetilebilir": "Yılın en yoğun döneminde iki ekip üyeniz aynı anda izne çıktı.\nO hafta müşterilerden gelen talepler yığıldı, bazıları yanıtsız kaldı, bazılarına geç dönüldü.\nMüşteri şikayet etmedi belki; fakat bir sonraki talebinde \"sizi bulmak bazen zor oluyor\" diyecektir.",
+    "Oturmuş": "Rakibiniz müşterinize daha iyi bir fiyatla gidiyor.\nMüşteri teklifi alıyor ama karar vermeden önce sizi arıyor: \"Sizinle nasıl ilerlediğimizi biliyorum, orada neyle karşılaşacağımı bilmiyorum\"\nÇünkü sizinle çalışmak onun için sadece sonuç değil, sürecin kendisi.\nFiyat daha iyi olsa da bildiği ve güvendiği ilişkiyi bırakmak istemiyor.",
   },
   yaklasim: {
-    "Değişken": "Şirket zor bir dönemden geçiyor; hedefler baskı altında, gündem yoğun.\nToplantılarda müşterinin adı pek geçmedi çünkü o an için “lüks” gibi hissettirdi.\nSonraki çeyrekte her şey normale döndü, müşteri odaklılık yeniden gündeme geldi.\nYaklaşım içten geliyor ama baskı altında ilk geri çekilen şeylerden biri müşterinin ne düşündüğü.",
-    "Dikkatli": "Önemli bir karar alınacak.\n“Müşteri bunu nasıl karşılar?” sorusu soruluyor.\nKısa bir değlendirme yapılıyor ama herkes kendi deneyimine göre konuşuyor.\nKarar, kesinlikten çok tahminle veriliyor.",
-    "Belirleyici": "Yeni bir süreç tasarılanıyor.\nDaha ilk anda herkes aynı soruyla başlıyor: “Müşteri burada ne yaşayacak?”\nTüm adımlar buna göre netleştiriliyor. Sistem devreye girdiğinde müşteri hiçbir şey sormadan süreci tamamlıyor.\nİçeride büyük bir değişim oluyor.\nMüşteri sadece şunu hissediyor: “Her şey olması gerektiği gibi.”",
+    "Değişken": "Şirket zor bir dönemden geçiyor; hedefler baskı altında, gündem yoğun.\nToplantılarda müşterinin adı pek geçmedi çünkü o an için \"lüks\" gibi hissettirdi.\nSonraki çeyrekte her şey normale döndü, müşteri odaklılık yeniden gündeme geldi.\nYaklaşım içten geliyor ama baskı altında ilk geri çekilen şeylerden biri müşterinin ne düşündüğü.",
+    "Dikkatli": "Önemli bir karar alınacak.\n\"Müşteri bunu nasıl karşılar?\" sorusu soruluyor.\nKısa bir değerlendirme yapılıyor ama herkes kendi deneyimine göre konuşuyor.\nKarar, kesinlikten çok tahminle veriliyor.",
+    "Belirleyici": "Yeni bir süreç tasarılanıyor.\nDaha ilk anda herkes aynı soruyla başlıyor: \"Müşteri burada ne yaşayacak?\"\nTüm adımlar buna göre netleştiriliyor. Sistem devreye girdiğinde müşteri hiçbir şey sormadan süreci tamamlıyor.\nİçeride büyük bir değişim oluyor.\nMüşteri sadece şunu hissediyor: \"Her şey olması gerektiği gibi.\"",
   },
-}
+};
 
 const ESIKLER = {
   tanima:   [[0,17,"Kısmen"],[18,32,"İyi"],[33,42,"Çok İyi"]],
@@ -460,7 +451,6 @@ function updateDots(active) {
   document.getElementById("prog-fill").style.width = Math.round((active+1)/3*100) + "%";
 }
 
-// Build question rows for a section
 function buildSection(alan, containerId, btnId) {
   const container = document.getElementById(containerId);
   container.innerHTML = "";
@@ -483,7 +473,6 @@ function buildSection(alan, containerId, btnId) {
 function setAnswer(qid, key, alan, btnId, btn) {
   const puanMap = {evet:3, kismen:2, hayir:1, bilmiyorum:null};
   cevaplar[qid] = { cevap: key, puan: puanMap[key] };
-  // Update buttons in this row
   const row = btn.closest(".q-row");
   row.querySelectorAll(".ans-btn").forEach(b => b.className = "ans-btn");
   btn.className = "ans-btn sel-" + key;
@@ -548,13 +537,14 @@ function submitEmail() {
   if (!email) { alert("Sonuçlarınızı görmek için e-posta adresinizi girmeniz gerekiyor."); return; }
   const domain = email.split("@")[1]?.toLowerCase();
   if (!domain || BLOCKED_DOMAINS.includes(domain)) { alert("Lütfen geçerli bir iş e-postası girin."); return; }
-if (!kvkk) {
-  document.getElementById("kvkk-error").style.display = "block";
-  return;
-}
-document.getElementById("kvkk-error").style.display = "none";
-if (email.split("@")[0].length < 3) { alert("Lütfen geçerli bir e-posta adresi girin."); return; }
-demo.email = email;  demo.kvkk  = kvkk;
+  if (!kvkk) {
+    document.getElementById("kvkk-error").style.display = "block";
+    return;
+  }
+  document.getElementById("kvkk-error").style.display = "none";
+  if (email.split("@")[0].length < 3) { alert("Lütfen geçerli bir e-posta adresi girin."); return; }
+  demo.email = email;
+  demo.kvkk  = kvkk;
   goToResults();
 }
 
@@ -606,11 +596,12 @@ function hesaplaToplamSkor(sonuclar) {
 }
 
 function profilBul(skor) {
-  if (skor < 2) return { isim: "Uzak", icon: "\uD83D\uDC64", aciklama: "Verdi\u011finiz yan\u0131tlara g\u00f6re m\u00fc\u015fteriniz sizi uzaktan tan\u0131yor, ba\u011f\u0131n\u0131z hen\u00fcz ba\u015flang\u0131\u00e7 seviyesinde \uD83D\uDC64" };
-  if (skor < 3) return { isim: "Karas\u0131z", icon: "\uD83E\uDD14", aciklama: "Verdi\u011finiz yan\u0131tlara g\u00f6re m\u00fc\u015fteriniz sizi tan\u0131yor fakat sizinle devam edip etmeme konusunda karas\u0131z \uD83E\uDD14" };
-  if (skor < 4) return { isim: "Memnun", icon: "\uD83D\uDE42", aciklama: "Verdi\u011finiz yan\u0131tlara g\u00f6re m\u00fc\u015fteriniz sizi tan\u0131yor ve genel olarak deneyiminden memnun \uD83D\uDE42" };
-  return { isim: "Sad\u0131k", icon: "\uD83D\uDC99", aciklama: "Verdi\u011finiz yan\u0131tlara g\u00f6re m\u00fc\u015fteriniz sizi iyi tan\u0131yor ve s\u0131kl\u0131kla tercih ediyor \uD83D\uDC99" };
+  if (skor < 2) return { isim: "Uzak", icon: "👤", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi uzaktan tanıyor, bağınız henüz başlangıç seviyesinde 👤" };
+  if (skor < 3) return { isim: "Kararsız", icon: "🤔", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi tanıyor fakat sizinle devam edip etmeme konusunda kararsız 🤔" };
+  if (skor < 4) return { isim: "Memnun", icon: "🙂", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi tanıyor ve genel olarak deneyiminden memnun 🙂" };
+  return { isim: "Sadık", icon: "💙", aciklama: "Verdiğiniz yanıtlara göre müşteriniz sizi iyi tanıyor ve sıklıkla tercih ediyor 💙" };
 }
+
 function renderResults(sonuclar) {
   const toplamSkor = hesaplaToplamSkor(sonuclar);
   const profil = profilBul(toplamSkor);
