@@ -332,8 +332,7 @@ input[type="email"]:focus { outline: none; border-color: var(--jasper); }
       </div>
       <div class="kvkk-row">
         <input type="checkbox" id="kvkk-check"/>
-<label for="kvkk-check">Aydınlatma Metni ve <a href="https://www.gucok.com/aydinlatma-metni-gizlilik-politikasi/" target="_blank">Gizlilik Politikasını</a> okudum. Analiz sonuçlarımın değerlendirilmesi ve bu kapsamda tarafıma danışmanlık/iletişim sağlanması amacıyla bilgilerimin işlenmesini kabul ediyorum.</label>      </div>
-      <button class="btn-next" style="width:100%" onclick="submitEmail()">Sonuçlarımı Gör →</button>
+<label for="kvkk-check"><a href="https://www.gucok.com/aydinlatma-metni-gizlilik-politikasi/" target="_blank">Aydınlatma Metni ve Gizlilik Politikasını</a> okudum. Analiz sonuçlarımın değerlendirilmesi ve bu kapsamda tarafıma danışmanlık/iletişim sağlanması amacıyla bilgilerimin işlenmesini kabul ediyorum.</label>      <button class="btn-next" style="width:100%" onclick="submitEmail()">Sonuçlarımı Gör →</button>
     </div>
   </div>
 
@@ -545,9 +544,12 @@ function submitEmail() {
   if (!email) { alert("Sonuçlarınızı görmek için e-posta adresinizi girmeniz gerekiyor."); return; }
   const domain = email.split("@")[1]?.toLowerCase();
   if (!domain || BLOCKED_DOMAINS.includes(domain)) { alert("Lütfen geçerli bir iş e-postası girin."); return; }
-  if (!kvkk) { alert("Devam etmek için gizlilik politikasını onaylamanız gerekiyor."); return; }
-  if (email.split("@")[0].length < 3) { alert("Lütfen geçerli bir e-posta adresi girin."); return; }
-  demo.email = email;
+if (!kvkk) {
+  document.getElementById("kvkk-error").style.display = "block";
+  return;
+}
+document.getElementById("kvkk-error").style.display = "none";
+if (email.split("@")[0].length < 3) { alert("Lütfen geçerli bir e-posta adresi girin."); return; }  demo.email = email;
   demo.kvkk  = kvkk;
   goToResults();
 }
