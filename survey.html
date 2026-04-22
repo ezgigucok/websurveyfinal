@@ -549,8 +549,8 @@ if (!kvkk) {
   return;
 }
 document.getElementById("kvkk-error").style.display = "none";
-if (email.split("@")[0].length < 3) { alert("Lütfen geçerli bir e-posta adresi girin."); return; }  demo.email = email;
-  demo.kvkk  = kvkk;
+if (email.split("@")[0].length < 3) { alert("Lütfen geçerli bir e-posta adresi girin."); return; }
+demo.email = email;  demo.kvkk  = kvkk;
   goToResults();
 }
 
