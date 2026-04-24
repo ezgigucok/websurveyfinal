@@ -43,27 +43,20 @@ module.exports = async function handler(req, res) {
     };
 
     if (type === 'gorusme') {
-      // Katılımcı maildeki butona tıkladı — sana bildirim gönder
-      const html = header('Yeni görüşme talebi (mail üzerinden)') + kisiTablosu + '<table style="width:100%;border-collapse:collapse;">' + skorSatirlari + '</table></div>' + footer + '</div>';
+      const html = header('Yeni görüşme talebi') + kisiTablosu + '<table style="width:100%;border-collapse:collapse;">' + skorSatirlari + '</table></div>' + footer + '</div>';
       await send('ezgi@gucok.com', 'Yeni görüşme talebi — ' + (demo.sektor || 'Anket'), html);
     }
 
     if (type === 'result') {
-      // Sana özet maili
       const htmlEzgi = header('Anket Tamamlandı') + kisiTablosu + '<table style="width:100%;border-collapse:collapse;">' + skorSatirlari + '</table></div>' + footer + '</div>';
       await send('ezgi@gucok.com', 'Anket Tamamlandı — ' + (demo.sektor || '-'), htmlEzgi);
 
-      // Katılımcıya sonuç maili
       if (demo.email) {
-        // Demo ve sonuçları URL parametresine encode ediyoruz
-        const params = encodeURIComponent(JSON.stringify({ demo: demo, sonuclar: sonuclar }));
-        const gorusmeUrl = 'https://websurveyfinal.vercel.app/api/gorusme-redirect?data=' + params;
-
         const htmlKatilimci = header('Anket bitti. Asıl soru: Nereden başlamalısın?')
           + '<p style="font-size:14px;color:#6b7280;margin:0 0 20px;line-height:1.6;">Sonuçlarınız:</p>'
           + '<table style="width:100%;border-collapse:collapse;margin-bottom:28px;">' + skorSatirlari + '</table>'
           + '<p style="font-size:14px;color:#2e304c;line-height:1.7;margin:0 0 24px;">Her sonuç hem müşteriniz hem de firmanız için fırsat barındırıyor. 30 dakikada hangisinden başlamak istediğinizi konuşalım.</p>'
-          + '<div style="text-align:center;margin-bottom:16px;"><a href="' + gorusmeUrl + '" style="display:inline-block;padding:13px 32px;background:#d5354d;color:#fff;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none;">Ücretsiz Görüşme Planla →</a></div>'
+          + '<div style="text-align:center;margin-bottom:16px;"><a href="https://calendly.com/ezgi-gucok/30min" style="display:inline-block;padding:13px 32px;background:#d5354d;color:#fff;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none;">Ücretsiz Görüşme Planla →</a></div>'
           + '<div style="text-align:center;"><a href="https://www.gucok.com" style="font-size:13px;color:#6b7280;text-decoration:none;">Güçok hakkında daha fazla bilgi almak için →</a></div>'
           + '</div>' + footer + '</div>';
         await send(demo.email, 'Anket bitti. Asıl soru: Nereden başlamalısın? 👇', htmlKatilimci);
