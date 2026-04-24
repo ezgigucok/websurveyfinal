@@ -56,7 +56,7 @@ module.exports = async function handler(req, res) {
           + '<p style="font-size:14px;color:#6b7280;margin:0 0 20px;line-height:1.6;">Sonuçlarınız:</p>'
           + '<table style="width:100%;border-collapse:collapse;margin-bottom:28px;">' + skorSatirlari + '</table>'
           + '<p style="font-size:14px;color:#2e304c;line-height:1.7;margin:0 0 24px;">Her sonuç hem müşteriniz hem de firmanız için fırsat barındırıyor. 30 dakikada hangisinden başlamak istediğinizi konuşalım.</p>'
-          + '<div style="text-align:center;margin-bottom:16px;"><a href="https://calendly.com/ezgi-gucok/30min" style="display:inline-block;padding:13px 32px;background:#d5354d;color:#fff;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none;">Ücretsiz Görüşme Planla →</a></div>'
+          + '<div style="text-align:center;margin-bottom:16px;"><a href="https://bookings.cloud.microsoft/bookwithme/user/fe33a2ccef8743f8b680ce8097a2522b%40gucok.com/meetingtype/aVLq6Klg4EKQE4EZQYuNHw2?anonymous&ismsaljsauthenabled=true" style="display:inline-block;padding:13px 32px;background:#d5354d;color:#fff;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none;">Ücretsiz Görüşme Planla →</a></div>'
           + '<div style="text-align:center;"><a href="https://www.gucok.com" style="font-size:13px;color:#6b7280;text-decoration:none;">Güçok hakkında daha fazla bilgi almak için →</a></div>'
           + '</div>' + footer + '</div>';
         await send(demo.email, 'Anket bitti. Asıl soru: Nereden başlamalısın? 👇', htmlKatilimci);
