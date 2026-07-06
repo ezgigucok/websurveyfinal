@@ -4,16 +4,13 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).end();
-
   try {
     const { demo, cevaplar, sonuclar, tarih } = req.body;
-
     // Cevaplar dizisini { t1: "evet", i2: "hayir", ... } formatına çevir
     const cevapMap = {};
     if (Array.isArray(cevaplar)) {
       cevaplar.forEach(function(c) { cevapMap[c.id] = c.cevap; });
     }
-
     // Toplam skoru ve profili hesapla
     const maxlar = { tanima: 42, iliski: 39, yaklasim: 18 };
     const agirliklar = { tanima: 0.40, iliski: 0.35, yaklasim: 0.25 };
@@ -25,12 +22,10 @@ export default async function handler(req, res) {
       }
     });
     toplamSkor = Math.round(toplamSkor * 10) / 10;
-
     let profil = 'Uzak';
     if (toplamSkor >= 4) profil = 'Sadık';
     else if (toplamSkor >= 3) profil = 'Memnun';
     else if (toplamSkor >= 2) profil = 'Kararsız';
-
     const payload = {
       tarih:           tarih || new Date().toISOString(),
       kvkk:            demo?.kvkk || false,
@@ -60,8 +55,10 @@ export default async function handler(req, res) {
       y2: cevapMap['y2'] || null,
       y3: cevapMap['y3'] || null,
       y4: cevapMap['y4'] || null,
+      yorum_tanima:    demo?.yorum_tanima || null,
+      yorum_iliski:    demo?.yorum_iliski || null,
+      yorum_yaklasim:  demo?.yorum_yaklasim || null,
     };
-
     const r = await fetch(`${process.env.SUPABASE_URL}/rest/v1/anket_sonuclari`, {
       method: 'POST',
       headers: {
@@ -72,12 +69,10 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify(payload),
     });
-
     if (!r.ok) {
       const err = await r.text();
       return res.status(500).json({ error: err });
     }
-
     return res.status(200).json({ ok: true });
   } catch (e) {
     return res.status(500).json({ error: e.message });
